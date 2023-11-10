@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { AuthService } from '../../shared/services/auth.service';
 import { Router } from '@angular/router';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-inscription',
@@ -8,31 +9,34 @@ import { Router } from '@angular/router';
   styleUrls: ['./inscription.component.scss'],
 })
 
-
 export class InscriptionComponent {
-  userData = {
-    name: '',
-    email: '',
-    pseudo: '',
-    password: ''
-  };
+  inscriptionForm: FormGroup;
 
-  constructor(private authService: AuthService, private router: Router) {}
+  constructor(private authService: AuthService, private router: Router, private fb: FormBuilder) {
+    this.inscriptionForm = this.fb.group({
+      name: ['', Validators.required],
+      email: ['', [Validators.required, Validators.email]],
+      pseudo: ['', Validators.required],
+      password: ['', Validators.required],
+    });
+  }
 
   submitInscription() {
+    console.log('Début de la fonction submitInscription');
+    if (this.inscriptionForm.valid) {
+      console.log('Formulaire valide');
+      const formData = this.inscriptionForm.value;
 
-    this.authService.inscription(this.userData).then(
-      (response) => {
+      this.authService.inscription(formData).then(
+        (response) => {
+          console.log('Inscription réussie', response);
 
-        console.log('Inscription réussie', response);
-      },
-      (error) => {
-
-        console.error('Erreur lors de l inscription', error);
-      }
-    );
-
-    this.router.navigate(['']);
+          this.router.navigate(['']);
+        },
+        (error) => {
+          console.error('Erreur lors de l\'inscription', error);
+        }
+      );
+    }
   }
 }
-
