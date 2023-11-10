@@ -8,6 +8,7 @@ import { InscriptionComponent } from './pages/inscription/inscription.component'
 import { AccueilComponent } from './pages/accueil/accueil.component';
 import {HttpClientModule} from "@angular/common/http";
 import { ConnexionComponent } from './pages/connexion/connexion.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { ConnexionComponent } from './pages/connexion/connexion.component';
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-      HttpClientModule
+    HttpClientModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
