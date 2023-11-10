@@ -1,12 +1,12 @@
 // connexion.component.ts
 
 import { Component } from '@angular/core';
-import { AuthService } from './path-to-your-auth.service';
+import { AuthService } from '../../shared/services/auth.service';
 
 @Component({
   selector: 'app-connexion',
   templateUrl: './connexion.component.html',
-  styleUrls: ['./connexion.component.css']
+  styleUrls: ['./connexion.component.scss']
 })
 export class ConnexionComponent {
   loginData = {

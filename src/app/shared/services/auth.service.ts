@@ -11,9 +11,15 @@ export class AuthService {
 
   constructor(private http: HttpClient) {}
 
+
+
   inscription(userData: any) {
     // Utilisez HttpClient pour envoyer une requête POST vers l'API Laravel pour l'inscription
     return this.requestApi('/register', 'POST', userData);
+  }
+
+  login(loginData: any) {
+    return this.requestApi('/login', 'POST', loginData);
   }
 
   public async requestApi(action: string, method: string = 'GET', datas: any = {}, httpOptions: any = {}): Promise<any> {
@@ -67,4 +73,8 @@ export class AuthService {
 
     return req.toPromise();
   }
+
+
+
+
 }
