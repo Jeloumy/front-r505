@@ -3,6 +3,8 @@
 import { Component } from '@angular/core';
 import { AuthService } from '../../shared/services/auth.service';
 import { Router } from '@angular/router';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+
 
 @Component({
   selector: 'app-connexion',
@@ -10,22 +12,31 @@ import { Router } from '@angular/router';
   styleUrls: ['./connexion.component.scss']
 })
 export class ConnexionComponent {
-  loginData = {
-    identifier: '',  // identifier peut être soit l'email soit le pseudo
-    password: ''
-  };
 
-  constructor(private authService: AuthService, private router: Router) {}
+  loginForm: FormGroup;
 
-  onLoginSubmit() {
-    this.authService.login(this.loginData).then((response) => {
-      // Traiter la réponse, gérer le token, rediriger vers la page d'accueil, etc.
-      console.log(response);
-    }).catch((error) => {
-      // Gérer les erreurs, afficher un message d'erreur, etc.
-      console.error(error);
+  constructor(private authService: AuthService, private router: Router, private fb: FormBuilder) {
+    this.loginForm = this.fb.group({
+      identifier: ['', Validators.required],
+      password: ['', Validators.required],
     });
-    this.router.navigate(['']);
+  }
+  onLoginSubmit() {
+    if (this.loginForm.valid) {
+      const loginFormData = this.loginForm.value;
+
+      this.authService.login(loginFormData).then(
+        (response) => {
+          // Traiter la réponse, gérer le token, rediriger vers la page d'accueil, etc.
+          console.log(response);
+          this.router.navigate(['']);
+        },
+        (error) => {
+          // Gérer les erreurs, afficher un message d'erreur, etc.
+          console.error(error);
+        }
+      );
+    }
   }
 }
 
