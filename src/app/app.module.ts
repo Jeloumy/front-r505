@@ -7,12 +7,14 @@ import { AppComponent } from './app.component';
 import { InscriptionComponent } from './pages/inscription/inscription.component';
 import { AccueilComponent } from './pages/accueil/accueil.component';
 import {HttpClientModule} from "@angular/common/http";
+import { ConnexionComponent } from './pages/connexion/connexion.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     InscriptionComponent,
-    AccueilComponent
+    AccueilComponent,
+    ConnexionComponent
   ],
   imports: [
     BrowserModule,
