@@ -19,7 +19,7 @@ export class AuthService {
   }
 
   login(loginData: any) {
-    return this.requestApi('/login', 'POST', loginData);
+    return this.requestApi('/auth/login', 'POST', loginData);
   }
 
   public async requestApi(action: string, method: string = 'GET', datas: any = {}, httpOptions: any = {}): Promise<any> {
