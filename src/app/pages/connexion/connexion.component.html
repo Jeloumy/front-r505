@@ -1,22 +1,11 @@
-<!-- connexion.component.html -->
-
-<!-- connexion.component.html -->
-
-<div>
-  <h2>Connexion</h2>
-  <form (ngSubmit)="onLoginSubmit()">
-    <div>
-      <label for="identifier">Email ou Pseudo:</label>
-      <input type="text" id="identifier" name="identifier" [(ngModel)]="loginData.identifier" required>
-    </div>
-
-    <div>
-      <label for="password">Mot de passe:</label>
-      <input type="password" id="password" name="password" [(ngModel)]="loginData.password" required>
-    </div>
-
-    <button type="submit">Se connecter</button>
-  </form>
-</div>
-
-
+<form [formGroup]="loginForm" (submit)="onLoginSubmit()">
+  <div class="form-group">
+    <label for="identifier">Identifiant (email ou pseudo)</label>
+    <input type="text" id="identifier" formControlName="identifier" class="form-control" required>
+  </div>
+  <div class="form-group">
+    <label for="password">Mot de passe</label>
+    <input type="password" id="password" formControlName="password" class="form-control" required>
+  </div>
+  <button type="submit" class="btn btn-primary">Se connecter</button>
+</form>
