@@ -8,6 +8,7 @@ import { InscriptionComponent } from './pages/inscription/inscription.component'
 import { AccueilComponent } from './pages/accueil/accueil.component';
 import {HttpClientModule} from "@angular/common/http";
 import { ConnexionComponent } from './pages/connexion/connexion.component';
+import {MatIconModule} from '@angular/material/icon';
 import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
@@ -22,7 +23,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatIconModule
   ],
   providers: [],
   bootstrap: [AppComponent]
