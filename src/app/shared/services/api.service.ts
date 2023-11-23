@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {API_URL} from "../../../environments/environment.development";
+import {BACK_URL} from "../../../environments/environment.development";
 import {Subject} from "rxjs";
 import {Router} from "@angular/router";
 

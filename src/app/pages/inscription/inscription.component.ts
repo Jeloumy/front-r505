@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { ApiService } from '../../shared/services/api.service';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import {BACK_URL} from "../../../environments/environment.development";
 
 @Component({
   selector: 'app-inscription',
@@ -11,6 +12,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 export class InscriptionComponent {
   inscriptionForm: FormGroup;
+  BACK_URL=BACK_URL
 
   constructor(private apiService: ApiService, private router: Router, private fb: FormBuilder) {
     this.inscriptionForm = this.fb.group({
