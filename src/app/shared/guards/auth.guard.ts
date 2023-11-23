@@ -41,7 +41,7 @@ export class AuthService {
 
   // Vérifie si l'utilisateur est sur la page de connexion ou d'inscription
   private isLoginOrRegister(): boolean {
-    if (this.url.includes('/connexion')) {
+    if (this.url.includes('/connexion')||this.url.includes('/inscription')) {
       return true;
     }
     return false;
