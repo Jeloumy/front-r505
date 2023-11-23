@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { AuthService } from '../../shared/services/auth.service';
+import { ApiService } from '../../shared/services/api.service';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
@@ -12,7 +12,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 export class InscriptionComponent {
   inscriptionForm: FormGroup;
 
-  constructor(private authService: AuthService, private router: Router, private fb: FormBuilder) {
+  constructor(private authService: ApiService, private router: Router, private fb: FormBuilder) {
     this.inscriptionForm = this.fb.group({
       name: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],

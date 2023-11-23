@@ -1,7 +1,7 @@
 // connexion.component.ts
 
 import { Component } from '@angular/core';
-import { AuthService } from '../../shared/services/auth.service';
+import { ApiService } from '../../shared/services/api.service';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
@@ -15,7 +15,7 @@ export class ConnexionComponent {
 
   loginForm: FormGroup;
 
-  constructor(private authService: AuthService, private router: Router, private fb: FormBuilder) {
+  constructor(private authService: ApiService, private router: Router, private fb: FormBuilder) {
     this.loginForm = this.fb.group({
       identifier: ['', Validators.required],
       password: ['', Validators.required],
