@@ -10,13 +10,15 @@ import {HttpClientModule} from "@angular/common/http";
 import { ConnexionComponent } from './pages/connexion/connexion.component';
 import {MatIconModule} from '@angular/material/icon';
 import { ReactiveFormsModule } from '@angular/forms';
+import { TournoisComponent } from './pages/tournois/tournois.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     InscriptionComponent,
     AccueilComponent,
-    ConnexionComponent
+    ConnexionComponent,
+    TournoisComponent
   ],
   imports: [
     BrowserModule,
