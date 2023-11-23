@@ -55,6 +55,10 @@ export class ApiService {
     return this.requestApi('/auth/login', 'POST', loginData);
   }
 
+  tournoi(tournamentData: any) {
+    return this.requestApi('/tournoi', 'POST', tournamentData);
+  }
+
   public async requestApi(action: string, method: string = 'GET', datas: any = {}, httpOptions: any = {}): Promise<any> {
     // if (!this.onlineStatusService.getIsOnline()) {
     //   console.log('no request because offline');
