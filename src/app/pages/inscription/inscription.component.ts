@@ -12,7 +12,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 export class InscriptionComponent {
   inscriptionForm: FormGroup;
 
-  constructor(private authService: ApiService, private router: Router, private fb: FormBuilder) {
+  constructor(private apiService: ApiService, private router: Router, private fb: FormBuilder) {
     this.inscriptionForm = this.fb.group({
       name: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
@@ -27,10 +27,10 @@ export class InscriptionComponent {
       console.log('Formulaire valide');
       const formData = this.inscriptionForm.value;
 
-      this.authService.inscription(formData).then(
+      this.apiService.inscription(formData).then(
         (response) => {
           console.log('Inscription réussie', response);
-
+          this.apiService.savTokens(response.token);
           this.router.navigate(['']);
         },
         (error) => {

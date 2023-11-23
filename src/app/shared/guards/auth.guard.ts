@@ -35,13 +35,13 @@ export class AuthService {
     if (this.isLoginOrRegister()) {
       return true;
     }
-    this.router.navigate(['/login']);
+    this.router.navigate(['/connexion']);
     return false;
   }
 
   // Vérifie si l'utilisateur est sur la page de connexion ou d'inscription
   private isLoginOrRegister(): boolean {
-    if (this.url.includes('/login')) {
+    if (this.url.includes('/connexion')) {
       return true;
     }
     return false;
