@@ -11,6 +11,7 @@ import { ConnexionComponent } from './pages/connexion/connexion.component';
 import {MatIconModule} from '@angular/material/icon';
 import { ReactiveFormsModule } from '@angular/forms';
 import { TournoisComponent } from './pages/tournois/tournois.component';
+import { JeuComponent } from './pages/jeu/jeu.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { TournoisComponent } from './pages/tournois/tournois.component';
     InscriptionComponent,
     AccueilComponent,
     ConnexionComponent,
-    TournoisComponent
+    TournoisComponent,
+    JeuComponent
   ],
   imports: [
     BrowserModule,
