@@ -1,11 +1,10 @@
-<form [formGroup]="jeuForm" (ngSubmit)="onSubmit()">
-  <div class="form-group">
-    <label for="name">Nom :</label>
-    <input type="text" id="name" formControlName="name">
-  </div>
-  <div class="form-group">
-    <label for="image">Image :</label>
-    <input type="file" id="image" (change)="onFileSelected($event)" accept="image/*">
-  </div>
-  <button type="submit" [disabled]="jeuForm.invalid">Ajouter Jeu</button>
+<form [formGroup]="uploadForm" (submit)="onSubmit()">
+  <label for="image">Sélectionnez un fichier PNG :</label>
+  <input type="file" id="image" (change)="onFileChange($event)">
+
+  <label for="name">Nom :</label>
+  <input type="text" id="name" formControlName="name">
+
+  <button type="submit">Envoyer</button>
 </form>
+
