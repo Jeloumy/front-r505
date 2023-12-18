@@ -12,6 +12,7 @@ import {MatIconModule} from '@angular/material/icon';
 import { ReactiveFormsModule } from '@angular/forms';
 import { TournoisComponent } from './pages/tournois/tournois.component';
 import { JeuComponent } from './pages/jeu/jeu.component';
+import { MenuComponent } from './pages/menu/menu.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { JeuComponent } from './pages/jeu/jeu.component';
     AccueilComponent,
     ConnexionComponent,
     TournoisComponent,
-    JeuComponent
+    JeuComponent,
+    MenuComponent
   ],
   imports: [
     BrowserModule,
