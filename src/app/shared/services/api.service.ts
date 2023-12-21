@@ -2,8 +2,12 @@ import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {API_URL} from "../../../environments/environment.development";
 import {BACK_URL} from "../../../environments/environment.development";
-import {Subject} from "rxjs";
+import {from, Subject} from "rxjs";
 import {Router} from "@angular/router";
+import { Observable } from 'rxjs';
+import { tap } from 'rxjs/operators';
+
+
 
 @Injectable({
   providedIn: 'root'
@@ -13,6 +17,7 @@ export class ApiService {
   token?: string;
   isInit: boolean = false;
   initEvent: Subject<boolean> = new Subject<boolean>();
+
 
   private isAuthenticated: boolean = false;
   constructor(
@@ -58,6 +63,17 @@ export class ApiService {
   tournoi(tournamentData: any) {
     return this.requestApi('/tournoi', 'POST', tournamentData);
   }
+
+
+
+  uploadFile(formData: any) {
+    const headers = new HttpHeaders({
+      'Authorization': 'Bearer ' + this.token
+    });
+    return this.requestApi('/jeu', 'POST', formData, { headers });
+  }
+
+
 
   public async requestApi(action: string, method: string = 'GET', datas: any = {}, httpOptions: any = {}): Promise<any> {
     // if (!this.onlineStatusService.getIsOnline()) {
@@ -134,5 +150,7 @@ export class ApiService {
     this.token = undefined;
   }
 
-
+  searchTournament(searchTerm: string) {
+    return this.requestApi(`/tournoi/search/${searchTerm}`);
+  }
 }

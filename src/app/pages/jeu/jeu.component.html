@@ -1,0 +1,10 @@
+<form [formGroup]="uploadForm" (submit)="onSubmit()">
+  <label for="image">Sélectionnez un fichier PNG :</label>
+  <input type="file" id="image" (change)="onFileChange($event)">
+
+  <label for="name">Nom :</label>
+  <input type="text" id="name" formControlName="name">
+
+  <button type="submit">Envoyer</button>
+</form>
+
