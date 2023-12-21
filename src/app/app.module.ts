@@ -13,6 +13,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { TournoisComponent } from './pages/tournois/tournois.component';
 import { JeuComponent } from './pages/jeu/jeu.component';
 import { MenuComponent } from './pages/menu/menu.component';
+import { SearchComponent } from './pages/search/search.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { MenuComponent } from './pages/menu/menu.component';
     ConnexionComponent,
     TournoisComponent,
     JeuComponent,
-    MenuComponent
+    MenuComponent,
+    SearchComponent
   ],
   imports: [
     BrowserModule,
