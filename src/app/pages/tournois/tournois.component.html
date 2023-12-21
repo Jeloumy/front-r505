@@ -15,10 +15,11 @@
     <label for="end_date">Fin du tournoi</label>
     <input type="text" id="end_date" formControlName="end_date" class="form-control" required>
   </div>
-  <div class="form-group">
-    <label for="jeu_id">Jeu</label>
-    <input type="text" id="jeu_id" formControlName="jeu_id" class="form-control" required>
-  </div>
+  <select formControlName="jeu_id" class="select w-full max-w-xs">
+    <option value="">Select</option>
+    <option *ngFor="let idJeu of jeux" value="{{idJeu.id}}">{{idJeu.name}}</option>
+  </select>
+
   <button type="submit" class="btn btn-primary">Créer le tournoi</button>
 </form>
 
