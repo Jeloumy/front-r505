@@ -17,9 +17,8 @@
   </div>
   <select formControlName="jeu_id" class="select w-full max-w-xs">
     <option value="">Select</option>
-    <option *ngFor="let idJeu of jeux" value="{{idJeu.id}}">{{idJeu.name}}</option>
+    <option *ngFor="let idJeu of jeux" value="{{idJeu.id}}">{{idJeu.name}}<img src="{{idJeu.image}}" alt="{{idJeu.name}}" class="jeu-image"></option>
   </select>
-
   <button type="submit" class="btn btn-primary">Créer le tournoi</button>
 </form>
 
