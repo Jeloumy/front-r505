@@ -14,6 +14,7 @@ import { TournoisComponent } from './pages/tournois/tournois.component';
 import { JeuComponent } from './pages/jeu/jeu.component';
 import { MenuComponent } from './pages/menu/menu.component';
 import { SearchComponent } from './pages/search/search.component';
+import { ValidFileTypePipe } from './pipes/ValidFileType/valid-file-type.pipe';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { SearchComponent } from './pages/search/search.component';
     TournoisComponent,
     JeuComponent,
     MenuComponent,
-    SearchComponent
+    SearchComponent,
+    ValidFileTypePipe
   ],
   imports: [
     BrowserModule,
