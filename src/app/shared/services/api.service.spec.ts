@@ -83,7 +83,7 @@ describe('ApiService', () => {
     req.flush(mockResponse);
   });
 
-  // Test pour 'searchTournament'
+// Test pour 'searchTournament'
   it('devrait envoyer une requête GET pour rechercher un tournoi', () => {
     const searchTerm = 'chess';
     const mockResponse = [{ name: 'Chess Tournament' }];
@@ -92,7 +92,7 @@ describe('ApiService', () => {
       expect(response).toEqual(mockResponse);
     });
 
-    const req = httpTestingController.expectOne(`${API_URL}/tournoi/search/${searchTerm}`);
+    const req = httpTestingController.expectOne(`${API_URL}/tournoi/search/${searchTerm}?`);
     expect(req.request.method).toBe('GET');
     req.flush(mockResponse);
   });
