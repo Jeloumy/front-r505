@@ -1,11 +1,5 @@
-<form [formGroup]="uploadForm" (submit)="onSubmit()">
-  <label for="image">Sélectionnez un fichier (JPEG, PNG, JPG, GIF, SVG) :</label>
-  <input type="file" id="image" (change)="onFileChange($event)">
-
-  <!-- Message d'erreur si le type de fichier n'est pas valide -->
-  <div *ngIf="!isValidFileType" class="error-message">
-    Seuls les fichiers JPEG, PNG, JPG, GIF, et SVG sont pris en compte.
-  </div>
+<form [formGroup]="uploadForm" (ngSubmit)="onSubmit()">
+  <app-image-uploader (fileChanged)="onFileChanged($event)"></app-image-uploader>
 
   <label for="name">Nom :</label>
   <input type="text" id="name" formControlName="name">
