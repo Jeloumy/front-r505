@@ -1,1 +1,19 @@
-<p>image-uploader works!</p>
+<div cdkDropList
+     class="drop-zone"
+     (cdkDropListDropped)="onDrop($event)"
+     (dragover)="onDragOver($event)"
+     (drop)="onDropFile($event)">
+  <label for="image" class="drop-zone-label">
+    Glissez votre image ici ou cliquez pour sélectionner
+  </label>
+  <input type="file" id="image" (change)="onFileChange($event)" hidden>
+  <div *ngIf="imagePreview" class="image-preview-container">
+    <img [src]="imagePreview" [alt]="selectedFile?.name" class="image-preview">
+    <p>{{ selectedFile?.name }}</p>
+    <button (click)="removeFile()">Supprimer</button>
+  </div>
+</div>
+
+<div *ngIf="!isValidFileType" class="error-message">
+  Seuls les fichiers JPEG, PNG, JPG, GIF, et SVG sont pris en compte.
+</div>
