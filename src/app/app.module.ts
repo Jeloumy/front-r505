@@ -15,6 +15,9 @@ import { JeuComponent } from './pages/jeu/jeu.component';
 import { MenuComponent } from './pages/menu/menu.component';
 import { SearchComponent } from './pages/search/search.component';
 import { ValidFileTypePipe } from './pipes/ValidFileType/valid-file-type.pipe';
+import {CdkDropList} from "@angular/cdk/drag-drop";
+import { ImageUploaderComponent } from './pages/image-uploader/image-uploader.component';
+
 
 @NgModule({
   declarations: [
@@ -26,7 +29,8 @@ import { ValidFileTypePipe } from './pipes/ValidFileType/valid-file-type.pipe';
     JeuComponent,
     MenuComponent,
     SearchComponent,
-    ValidFileTypePipe
+    ValidFileTypePipe,
+    ImageUploaderComponent
   ],
   imports: [
     BrowserModule,
@@ -34,7 +38,8 @@ import { ValidFileTypePipe } from './pipes/ValidFileType/valid-file-type.pipe';
     FormsModule,
     HttpClientModule,
     ReactiveFormsModule,
-    MatIconModule
+    MatIconModule,
+    CdkDropList
   ],
   providers: [],
   bootstrap: [AppComponent]
