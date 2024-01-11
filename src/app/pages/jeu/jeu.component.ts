@@ -1,9 +1,8 @@
 import { Component } from '@angular/core';
 import { ApiService } from '../../shared/services/api.service';
 import { Router } from '@angular/router';
-import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
+import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import { ChangeDetectorRef } from '@angular/core';
-import { ValidFileTypePipe } from '../../pipes/ValidFileType/valid-file-type.pipe';
 
 @Component({
   selector: 'app-jeu',
@@ -12,14 +11,12 @@ import { ValidFileTypePipe } from '../../pipes/ValidFileType/valid-file-type.pip
 })
 export class JeuComponent {
   uploadForm: FormGroup;
-  isValidFileType = true; // Ajout d'une propriété pour suivre la validité du type de fichier
 
   constructor(
     private apiService: ApiService,
     private router: Router,
     private fb: FormBuilder,
     private cd: ChangeDetectorRef,
-
   ) {
     this.uploadForm = this.fb.group({
       name: ['', Validators.required],
@@ -27,25 +24,17 @@ export class JeuComponent {
     });
   }
 
-
-  onFileChange(event: any) {
-    if (event.target.files && event.target.files.length > 0) {
-      const file = (event.target.files[0] as File);
-      const validFileTypePipe = new ValidFileTypePipe(); // Créez une instance du pipe
-      this.isValidFileType = validFileTypePipe.transform(file); // Utilisez le pipe
-
-      if (this.isValidFileType) {
-        const fileControl = this.uploadForm.get('image') as FormControl;
-        fileControl.setValue(file);
-      } else {
-        (this.uploadForm.get('image') as FormControl).reset();
-      }
+  onFileChanged(file: File | null) {
+    if (file) {
+      const fileControl = this.uploadForm.get('image') as FormControl;
+      fileControl.setValue(file);
+    } else {
+      (this.uploadForm.get('image') as FormControl).reset();
     }
   }
 
-
   onSubmit() {
-    if (this.uploadForm.valid && this.isValidFileType) { // Vérifiez également la validité du type de fichier avant de soumettre
+    if (this.uploadForm.valid) {
       console.log('Formulaire valide');
       const formData = new FormData();
       formData.append('name', this.uploadForm.get('name')?.value);
