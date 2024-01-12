@@ -12,7 +12,8 @@ export class TournoiItemComponent {
   constructor(private router: Router) {}
 
   navigateToTournoi(tournoiId: number) {
-    this.router.navigate(['/tournoi', tournoiId]);
+    this.router.navigate(['/tournoi-details', tournoiId]);
   }
 }
+
 
