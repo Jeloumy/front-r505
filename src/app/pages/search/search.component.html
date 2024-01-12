@@ -1,8 +1,7 @@
 <app-menu></app-menu>
 
-<p>search works!</p>
-
-
-<div *ngFor="let result of searchResults">
-  {{ result.name }}
+<div *ngFor="let tournoi of searchResults">
+  <app-tournoi-item [tournoi]="tournoi"></app-tournoi-item>
 </div>
+
+

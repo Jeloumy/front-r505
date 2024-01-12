@@ -14,6 +14,13 @@ import { TournoisComponent } from './pages/tournois/tournois.component';
 import { JeuComponent } from './pages/jeu/jeu.component';
 import { MenuComponent } from './pages/menu/menu.component';
 import { SearchComponent } from './pages/search/search.component';
+import { ValidFileTypePipe } from './pipes/ValidFileType/valid-file-type.pipe';
+import {CdkDropList} from "@angular/cdk/drag-drop";
+import { ImageUploaderComponent } from './pages/image-uploader/image-uploader.component';
+import { TournoiItemComponent } from './pages/tournoi-item/tournoi-item.component';
+import { TournoiDetailsComponent } from './pages/tournoi-details/tournoi-details.component';
+import { SafeUrlPipe } from './pipes/safe-url/safe-url.pipe';
+
 
 @NgModule({
   declarations: [
@@ -24,7 +31,12 @@ import { SearchComponent } from './pages/search/search.component';
     TournoisComponent,
     JeuComponent,
     MenuComponent,
-    SearchComponent
+    SearchComponent,
+    ValidFileTypePipe,
+    ImageUploaderComponent,
+    TournoiItemComponent,
+    TournoiDetailsComponent,
+    SafeUrlPipe
   ],
   imports: [
     BrowserModule,
@@ -32,7 +44,8 @@ import { SearchComponent } from './pages/search/search.component';
     FormsModule,
     HttpClientModule,
     ReactiveFormsModule,
-    MatIconModule
+    MatIconModule,
+    CdkDropList
   ],
   providers: [],
   bootstrap: [AppComponent]

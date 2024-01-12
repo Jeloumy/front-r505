@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import { ApiService } from '../../shared/services/api.service';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -10,8 +10,9 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
   styleUrls: ['./tournois.component.scss'],
 })
 
-export class TournoisComponent {
+export class TournoisComponent implements OnInit{
   TournoiForm: FormGroup;
+  jeux: any []=[];
 
   constructor(private apiService: ApiService, private router: Router, private fb: FormBuilder) {
     this.TournoiForm = this.fb.group({
@@ -20,7 +21,14 @@ export class TournoisComponent {
       begin_date: ['', Validators.required],
       end_date: ['', Validators.required],
       jeu_id: ['', Validators.required],
+      stream_url: [''],
     });
+  }
+
+  ngOnInit() {
+    this.apiService.requestApi(`/jeu`).then(data=>{
+      this.jeux = data;
+    })
   }
 
   submitTournoi() {

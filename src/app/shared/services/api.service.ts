@@ -6,6 +6,8 @@ import {from, Subject} from "rxjs";
 import {Router} from "@angular/router";
 import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
+//import { User } from '../../models/user.model';
+
 
 
 
@@ -27,29 +29,23 @@ export class ApiService {
     this.init();
   }
 
-  public async init(){
-    // Récupère le code dans l'url
+  public async init() {
     let urlParams = new URLSearchParams(window.location.search);
 
-    // S'il y a un code dans l'url, on effectue une requête pour récupérer le token
-    if(urlParams.has('code')){
-      let code = urlParams.get('code') as string;
-
-      // Effectue la requête sur le callback de l'API
-      let res = await this.requestApi('/auth/callback', 'GET', {code});
-      if(res && res.token){
-        this.savTokens(res.token);
-        this.router.navigate(['/']);
-      }
-    }else{
-      // Sinon on récupère le token dans le localstorage s'il existe et on le stocke dans la variable token
+    // Recherche du token dans l'URL
+    if (urlParams.has('token')) {
+      let token = urlParams.get('token') as string;
+      this.savTokens(token);
+      this.router.navigate(['/']);
+    } else {
+      // Récupère le token dans le localStorage s'il existe
       this.token = localStorage.getItem('apiToken') ? JSON.parse(localStorage.getItem('apiToken') as string).token : undefined;
     }
 
-    // On indique que l'initialisation est terminée
     this.isInit = true;
     this.initEvent.next(true);
   }
+
 
   inscription(userData: any) {
     // Utilisez HttpClient pour envoyer une requête POST vers l'API Laravel pour l'inscription
@@ -153,4 +149,9 @@ export class ApiService {
   searchTournament(searchTerm: string) {
     return this.requestApi(`/tournoi/search/${searchTerm}`);
   }
+
+  getTournoiById(tournoiId: string | null): Promise<any> {
+    return this.requestApi(`/tournoi/${tournoiId}`);
+  }
+
 }
