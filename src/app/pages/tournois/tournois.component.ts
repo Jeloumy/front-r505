@@ -21,6 +21,7 @@ export class TournoisComponent implements OnInit{
       begin_date: ['', Validators.required],
       end_date: ['', Validators.required],
       jeu_id: ['', Validators.required],
+      stream_url: [''],
     });
   }
 
