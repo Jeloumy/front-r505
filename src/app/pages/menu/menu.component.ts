@@ -27,6 +27,4 @@ export class MenuComponent  {
       console.error(error);
     });
   }
-
-
 }

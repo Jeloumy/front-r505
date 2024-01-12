@@ -3,10 +3,10 @@
     <!-- ... autres éléments du menu start ... -->
   </div>
 
-  <div class="navbar-center hidden lg:flex">
-    <div class="form-control">
-      <input type="text" placeholder="Rechercher un tournoi..." class="input input-bordered w-24 md:w-auto" [(ngModel)]="searchTerm" />
-      <button class="btn btn-primary ml-2" (click)="onSearch()">Rechercher</button>
+  <div class="navbar-center">
+    <div class="inline-flex items-center">
+      <input type="text" placeholder="Rechercher un tournoi..." class="input input-bordered" [(ngModel)]="searchTerm" />
+      <button class="btn btn-primary" (click)="onSearch()">Rechercher</button>
     </div>
   </div>
 

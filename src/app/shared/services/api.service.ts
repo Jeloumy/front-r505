@@ -55,9 +55,18 @@ export class ApiService {
     return this.requestApi('/register', 'POST', userData);
   }
 
-  login(loginData: any) {
-    return this.requestApi('/auth/login', 'POST', loginData);
+  login(loginData: any): Promise<any> {
+    return this.requestApi('/auth/login', 'POST', loginData).then(response => {
+      if (response && response.token) {
+        this.savTokens(response.token);
+        // Enregistrer l'information isAdmin
+        localStorage.setItem('admin', response.isAdmin ? '1' : '0');
+      }
+      return response;
+    });
   }
+
+
 
   tournoi(tournamentData: any) {
     return this.requestApi('/tournoi', 'POST', tournamentData);
@@ -71,6 +80,7 @@ export class ApiService {
     });
     return this.requestApi('/jeu', 'POST', formData, { headers });
   }
+
 
 
 
@@ -139,11 +149,8 @@ export class ApiService {
     return this.token !== undefined;
   }
 
-  public isAdmin(): boolean {
-    // @ts-ignore
-    const data = JSON.parse(localStorage.getItem('apiToken'));
-    return data?.isAdmin ?? false;
-  }
+
+
   public get isLoggedIn() {
     return this.isAuthenticated.asObservable();
   }
@@ -155,9 +162,17 @@ export class ApiService {
     return this.requestApi(`/tournoi/${tournoiId}`);
   }
 
+  public isAdmin(): boolean {
+    const adminValue = localStorage.getItem('admin');
+    return adminValue === '1';
+  }
+  public savAdmin(adminValue: string) {
+    localStorage.setItem('admin', adminValue);
+  }
   logout() {
     localStorage.removeItem('apiToken');
     this.token = undefined;
+    localStorage.removeItem('admin');
     this.isAuthenticated.next(false);
     return this.requestApi('/auth/logout'); // Assurez-vous que cela retourne une Promesse
   }
