@@ -1,1 +1,14 @@
-<p>tournoi-item works!</p>
+<div class="tournoi-item" (click)="navigateToTournoi(tournoi.id)">
+  <div *ngIf="tournoi.stream_url; else defaultImage" class="stream-preview">
+    <img src="vignette" alt="Aperçu du stream">
+  </div>
+  <ng-template #defaultImage>
+    <img src="defaut" alt="Image par défaut">
+  </ng-template>
+
+  <div class="tournoi-info">
+    <h3>{{ tournoi.name }}</h3>
+    <p>{{ tournoi.description }}</p>
+
+  </div>
+</div>
