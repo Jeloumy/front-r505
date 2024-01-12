@@ -139,6 +139,11 @@ export class ApiService {
     return this.token !== undefined;
   }
 
+  public isAdmin(): boolean {
+    // @ts-ignore
+    const data = JSON.parse(localStorage.getItem('apiToken'));
+    return data?.isAdmin ?? false;
+  }
   public get isLoggedIn() {
     return this.isAuthenticated.asObservable();
   }
