@@ -19,6 +19,7 @@ import {CdkDropList} from "@angular/cdk/drag-drop";
 import { ImageUploaderComponent } from './pages/image-uploader/image-uploader.component';
 import { TournoiItemComponent } from './pages/tournoi-item/tournoi-item.component';
 import { TournoiDetailsComponent } from './pages/tournoi-details/tournoi-details.component';
+import { SafeUrlPipe } from './pipes/safe-url/safe-url.pipe';
 
 
 @NgModule({
@@ -34,7 +35,8 @@ import { TournoiDetailsComponent } from './pages/tournoi-details/tournoi-details
     ValidFileTypePipe,
     ImageUploaderComponent,
     TournoiItemComponent,
-    TournoiDetailsComponent
+    TournoiDetailsComponent,
+    SafeUrlPipe
   ],
   imports: [
     BrowserModule,
