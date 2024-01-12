@@ -17,6 +17,7 @@ import { SearchComponent } from './pages/search/search.component';
 import { ValidFileTypePipe } from './pipes/ValidFileType/valid-file-type.pipe';
 import {CdkDropList} from "@angular/cdk/drag-drop";
 import { ImageUploaderComponent } from './pages/image-uploader/image-uploader.component';
+import { TournoiItemComponent } from './pages/tournoi-item/tournoi-item.component';
 
 
 @NgModule({
@@ -30,7 +31,8 @@ import { ImageUploaderComponent } from './pages/image-uploader/image-uploader.co
     MenuComponent,
     SearchComponent,
     ValidFileTypePipe,
-    ImageUploaderComponent
+    ImageUploaderComponent,
+    TournoiItemComponent
   ],
   imports: [
     BrowserModule,
