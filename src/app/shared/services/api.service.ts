@@ -154,4 +154,9 @@ export class ApiService {
     return this.requestApi(`/tournoi/${tournoiId}`);
   }
 
+  // api.service.ts
+  logout() {
+    return this.http.get('/auth/logout').toPromise();
+  }
+
 }
