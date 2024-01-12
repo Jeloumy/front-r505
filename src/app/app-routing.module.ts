@@ -7,6 +7,7 @@ import {authGuard} from "./shared/guards/auth.guard";
 import {TournoisComponent} from "./pages/tournois/tournois.component";
 import {JeuComponent} from "./pages/jeu/jeu.component";
 import { SearchComponent } from "./pages/search/search.component";
+import {TournoiDetailsComponent} from "./pages/tournoi-details/tournoi-details.component";
 
 const routes: Routes = [
   { path: '', component: AccueilComponent},
@@ -15,6 +16,7 @@ const routes: Routes = [
   { path: 'tournoi', component: TournoisComponent, canActivate: [authGuard]  },
   { path: 'jeu', component: JeuComponent, canActivate: [authGuard]  },
   { path: 'search/:req', component: SearchComponent, canActivate: [authGuard]   },
+  { path: 'tournoi-details/:id', component: TournoiDetailsComponent, canActivate: [authGuard]  }
 ];
 
 @NgModule({

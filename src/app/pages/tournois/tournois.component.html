@@ -19,6 +19,10 @@
     <option value="">Select</option>
     <option *ngFor="let idJeu of jeux" value="{{idJeu.id}}">{{idJeu.name}}<img src="{{idJeu.image}}" alt="{{idJeu.name}}" class="jeu-image"></option>
   </select>
+  <div class="form-group">
+    <label for="stream_url">URL du Stream</label>
+    <input type="url" id="stream_url" formControlName="stream_url" class="form-control">
+  </div>
   <button type="submit" class="btn btn-primary">Créer le tournoi</button>
 </form>
 
