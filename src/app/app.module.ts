@@ -18,6 +18,8 @@ import { ValidFileTypePipe } from './pipes/ValidFileType/valid-file-type.pipe';
 import {CdkDropList} from "@angular/cdk/drag-drop";
 import { ImageUploaderComponent } from './pages/image-uploader/image-uploader.component';
 import { TournoiItemComponent } from './pages/tournoi-item/tournoi-item.component';
+import { TournoiDetailsComponent } from './pages/tournoi-details/tournoi-details.component';
+import { SafeUrlPipe } from './pipes/safe-url/safe-url.pipe';
 
 
 @NgModule({
@@ -32,7 +34,9 @@ import { TournoiItemComponent } from './pages/tournoi-item/tournoi-item.componen
     SearchComponent,
     ValidFileTypePipe,
     ImageUploaderComponent,
-    TournoiItemComponent
+    TournoiItemComponent,
+    TournoiDetailsComponent,
+    SafeUrlPipe
   ],
   imports: [
     BrowserModule,

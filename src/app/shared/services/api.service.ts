@@ -149,4 +149,9 @@ export class ApiService {
   searchTournament(searchTerm: string) {
     return this.requestApi(`/tournoi/search/${searchTerm}`);
   }
+
+  getTournoiById(tournoiId: string | null): Promise<any> {
+    return this.requestApi(`/tournoi/${tournoiId}`);
+  }
+
 }
