@@ -12,7 +12,7 @@ import { ApiService } from '../../shared/services/api.service';
 export class MenuComponent  {
   searchTerm: string = '';
 
-  constructor(private apiService: ApiService, private router: Router
+  constructor(protected apiService: ApiService, private router: Router
   ) {}
 
   onSearch() {
