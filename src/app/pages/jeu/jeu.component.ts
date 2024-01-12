@@ -1,45 +1,37 @@
 import { Component } from '@angular/core';
 import { ApiService } from '../../shared/services/api.service';
 import { Router } from '@angular/router';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Observable } from 'rxjs';
-import { HttpClient } from '@angular/common/http';
+import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import { ChangeDetectorRef } from '@angular/core';
-import { FormControl } from '@angular/forms';
-
-
-
-
 
 @Component({
   selector: 'app-jeu',
   templateUrl: './jeu.component.html',
   styleUrls: ['./jeu.component.scss'],
 })
-
 export class JeuComponent {
   uploadForm: FormGroup;
 
-
-  constructor(private apiService: ApiService, private router: Router, private fb: FormBuilder, private cd: ChangeDetectorRef,) {
+  constructor(
+    private apiService: ApiService,
+    private router: Router,
+    private fb: FormBuilder,
+    private cd: ChangeDetectorRef,
+  ) {
     this.uploadForm = this.fb.group({
       name: ['', Validators.required],
       image: ['', Validators.required],
     });
   }
 
-
-
-  onFileChange(event: any) {
-    if (event.target.files && event.target.files.length > 0) {
-      const file = (event.target.files[0] as File);
+  onFileChanged(file: File | null) {
+    if (file) {
       const fileControl = this.uploadForm.get('image') as FormControl;
       fileControl.setValue(file);
+    } else {
+      (this.uploadForm.get('image') as FormControl).reset();
     }
   }
-
-
-
 
   onSubmit() {
     if (this.uploadForm.valid) {
