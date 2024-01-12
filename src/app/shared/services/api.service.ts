@@ -4,6 +4,7 @@ import {API_URL} from "../../../environments/environment.development";
 import {BACK_URL} from "../../../environments/environment.development";
 import {from, Subject} from "rxjs";
 import {Router} from "@angular/router";
+import { BehaviorSubject } from 'rxjs';
 import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
 //import { User } from '../../models/user.model';
@@ -16,12 +17,11 @@ import { tap } from 'rxjs/operators';
 })
 export class ApiService {
   private apiUrl = API_URL;
+
   token?: string;
   isInit: boolean = false;
   initEvent: Subject<boolean> = new Subject<boolean>();
-
-
-  private isAuthenticated: boolean = false;
+  private isAuthenticated = new BehaviorSubject<boolean>(this.hasToken());
   constructor(
     private http: HttpClient,
     private router: Router,
@@ -29,6 +29,9 @@ export class ApiService {
     this.init();
   }
 
+  public hasToken(): boolean {
+    return !!localStorage.getItem('apiToken');
+  }
   public async init() {
     let urlParams = new URLSearchParams(window.location.search);
 
@@ -92,8 +95,8 @@ export class ApiService {
 
     if (this.token) {
       httpOptions.headers = httpOptions.headers.set('Authorization', 'Bearer ' + this.token);
+      console.log("Token envoyé: ", this.token); // Ajouter pour le débogage
     }
-
     switch (methodWanted) {
       case 'post':
         req = this.http.post(route, datas, httpOptions);
@@ -119,33 +122,26 @@ export class ApiService {
         req = this.http.get(route, httpOptions);
         break;
     }
-
     return req.toPromise();
   }
 
   // Enregistre le token dans le localstorage et dans la variable token
-  savTokens(apiToken: string){
 
-    // Enregistre le token dans le localstorage
-    localStorage.setItem('apiToken', JSON.stringify({
-      token: apiToken,
-    }));
-
+  public savTokens(apiToken: string) {
+    localStorage.setItem('apiToken', JSON.stringify({ token: apiToken }));
     this.token = apiToken;
-
+    this.isAuthenticated.next(true);
   }
+
 
   // Vérifie si l'utilisateur est connecté
   isLogged(): boolean{
     return this.token !== undefined;
   }
 
-  // Déconnecte l'utilisateur
-  logout(){
-    localStorage.removeItem('apiToken');
-    this.token = undefined;
+  public get isLoggedIn() {
+    return this.isAuthenticated.asObservable();
   }
-
   searchTournament(searchTerm: string) {
     return this.requestApi(`/tournoi/search/${searchTerm}`);
   }
@@ -154,9 +150,10 @@ export class ApiService {
     return this.requestApi(`/tournoi/${tournoiId}`);
   }
 
-  // api.service.ts
   logout() {
-    return this.http.get('/auth/logout').toPromise();
+    localStorage.removeItem('apiToken');
+    this.token = undefined;
+    this.isAuthenticated.next(false);
+    return this.requestApi('/auth/logout'); // Assurez-vous que cela retourne une Promesse
   }
-
 }
