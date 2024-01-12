@@ -4,6 +4,7 @@ import {API_URL} from "../../../environments/environment.development";
 import {BACK_URL} from "../../../environments/environment.development";
 import {from, Subject} from "rxjs";
 import {Router} from "@angular/router";
+import { BehaviorSubject } from 'rxjs';
 import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
 //import { User } from '../../models/user.model';
@@ -16,12 +17,11 @@ import { tap } from 'rxjs/operators';
 })
 export class ApiService {
   private apiUrl = API_URL;
+
   token?: string;
   isInit: boolean = false;
   initEvent: Subject<boolean> = new Subject<boolean>();
-
-
-  private isAuthenticated: boolean = false;
+  private isAuthenticated = new BehaviorSubject<boolean>(this.hasToken());
   constructor(
     private http: HttpClient,
     private router: Router,
@@ -29,6 +29,9 @@ export class ApiService {
     this.init();
   }
 
+  public hasToken(): boolean {
+    return !!localStorage.getItem('apiToken');
+  }
   public async init() {
     let urlParams = new URLSearchParams(window.location.search);
 
@@ -52,9 +55,18 @@ export class ApiService {
     return this.requestApi('/register', 'POST', userData);
   }
 
-  login(loginData: any) {
-    return this.requestApi('/auth/login', 'POST', loginData);
+  login(loginData: any): Promise<any> {
+    return this.requestApi('/auth/login', 'POST', loginData).then(response => {
+      if (response && response.token) {
+        this.savTokens(response.token);
+        // Enregistrer l'information isAdmin
+        localStorage.setItem('admin', response.isAdmin ? '1' : '0');
+      }
+      return response;
+    });
   }
+
+
 
   tournoi(tournamentData: any) {
     return this.requestApi('/tournoi', 'POST', tournamentData);
@@ -68,6 +80,7 @@ export class ApiService {
     });
     return this.requestApi('/jeu', 'POST', formData, { headers });
   }
+
 
 
 
@@ -92,8 +105,8 @@ export class ApiService {
 
     if (this.token) {
       httpOptions.headers = httpOptions.headers.set('Authorization', 'Bearer ' + this.token);
+      console.log("Token envoyé: ", this.token); // Ajouter pour le débogage
     }
-
     switch (methodWanted) {
       case 'post':
         req = this.http.post(route, datas, httpOptions);
@@ -119,33 +132,28 @@ export class ApiService {
         req = this.http.get(route, httpOptions);
         break;
     }
-
     return req.toPromise();
   }
 
   // Enregistre le token dans le localstorage et dans la variable token
-  savTokens(apiToken: string){
 
-    // Enregistre le token dans le localstorage
-    localStorage.setItem('apiToken', JSON.stringify({
-      token: apiToken,
-    }));
-
+  public savTokens(apiToken: string) {
+    localStorage.setItem('apiToken', JSON.stringify({ token: apiToken }));
     this.token = apiToken;
-
+    this.isAuthenticated.next(true);
   }
+
 
   // Vérifie si l'utilisateur est connecté
   isLogged(): boolean{
     return this.token !== undefined;
   }
 
-  // Déconnecte l'utilisateur
-  logout(){
-    localStorage.removeItem('apiToken');
-    this.token = undefined;
-  }
 
+
+  public get isLoggedIn() {
+    return this.isAuthenticated.asObservable();
+  }
   searchTournament(searchTerm: string) {
     return this.requestApi(`/tournoi/search/${searchTerm}`);
   }
@@ -154,4 +162,18 @@ export class ApiService {
     return this.requestApi(`/tournoi/${tournoiId}`);
   }
 
+  public isAdmin(): boolean {
+    const adminValue = localStorage.getItem('admin');
+    return adminValue === '1';
+  }
+  public savAdmin(adminValue: string) {
+    localStorage.setItem('admin', adminValue);
+  }
+  logout() {
+    localStorage.removeItem('apiToken');
+    this.token = undefined;
+    localStorage.removeItem('admin');
+    this.isAuthenticated.next(false);
+    return this.requestApi('/auth/logout'); // Assurez-vous que cela retourne une Promesse
+  }
 }
