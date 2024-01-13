@@ -63,6 +63,21 @@ export class ApiService {
     return userId;
   }
 
+  getTeamByUserId(userId: string | undefined): Promise<any> {
+    return this.requestApi(`/team/team/user/${userId}`);
+  }
+
+  addUserToTeam(teamId: string, userId: string): Promise<any> {
+    return this.requestApi(`/team/${teamId}/add-user`, 'POST', { user_id: userId });
+  }
+
+  getTournamentsByTeam(teamId: string): Promise<any> {
+    return this.requestApi(`/team/${teamId}/tournois`);
+  }
+
+  addTeamToTournament(tournamentId: string, teamId: string): Promise<any> {
+    return this.requestApi(`/tournoi/${tournamentId}/register-team`, 'POST', { team_id: teamId });
+  }
 
 
   login(loginData: any): Promise<any> {
