@@ -55,16 +55,28 @@ export class ApiService {
     return this.requestApi('/register', 'POST', userData);
   }
 
+  getUserId(): string {
+    const userId = localStorage.getItem('userId');
+    if (!userId) {
+      throw new Error('ID utilisateur non trouvé');
+    }
+    return userId;
+  }
+
+
+
   login(loginData: any): Promise<any> {
     return this.requestApi('/auth/login', 'POST', loginData).then(response => {
       if (response && response.token) {
         this.savTokens(response.token);
-        // Enregistrer l'information isAdmin
         localStorage.setItem('admin', response.isAdmin ? '1' : '0');
+        localStorage.setItem('userId', response.user.id);
       }
       return response;
     });
   }
+
+
 
 
 
@@ -149,8 +161,6 @@ export class ApiService {
     return this.token !== undefined;
   }
 
-
-
   public get isLoggedIn() {
     return this.isAuthenticated.asObservable();
   }
@@ -169,10 +179,24 @@ export class ApiService {
   public savAdmin(adminValue: string) {
     localStorage.setItem('admin', adminValue);
   }
+
+  updateProfile(userId: string, updateData: any): Promise<any> {
+    return this.requestApi(`/auth/${userId}/2`, 'PUT', updateData);
+  }
+
+  changePassword(userId: string, passwordData: any): Promise<any> {
+    return this.requestApi(`/auth/${userId}/1`, 'PUT', passwordData);
+  }
+
+  deleteAccount(userId: string): Promise<any> {
+    return this.requestApi(`/auth/${userId}`, 'DELETE');
+  }
+
   logout() {
     localStorage.removeItem('apiToken');
     this.token = undefined;
     localStorage.removeItem('admin');
+    localStorage.removeItem('userId');
     this.isAuthenticated.next(false);
     return this.requestApi('/auth/logout'); // Assurez-vous que cela retourne une Promesse
   }

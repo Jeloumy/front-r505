@@ -20,6 +20,7 @@ import { ImageUploaderComponent } from './pages/image-uploader/image-uploader.co
 import { TournoiItemComponent } from './pages/tournoi-item/tournoi-item.component';
 import { TournoiDetailsComponent } from './pages/tournoi-details/tournoi-details.component';
 import { SafeUrlPipe } from './pipes/safe-url/safe-url.pipe';
+import { UserSettingsComponent } from './pages/user-settings/user-settings.component';
 
 
 @NgModule({
@@ -36,7 +37,8 @@ import { SafeUrlPipe } from './pipes/safe-url/safe-url.pipe';
     ImageUploaderComponent,
     TournoiItemComponent,
     TournoiDetailsComponent,
-    SafeUrlPipe
+    SafeUrlPipe,
+    UserSettingsComponent
   ],
   imports: [
     BrowserModule,
