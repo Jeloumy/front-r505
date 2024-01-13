@@ -27,4 +27,7 @@ export class MenuComponent  {
       console.error(error);
     });
   }
+  getUserId() {
+    return this.apiService.getUserId();
+  }
 }

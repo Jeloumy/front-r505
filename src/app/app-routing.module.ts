@@ -18,7 +18,7 @@ const routes: Routes = [
   { path: 'jeu', component: JeuComponent, canActivate: [authGuard]  },
   { path: 'search/:req', component: SearchComponent, canActivate: [authGuard]   },
   { path: 'tournoi-details/:id', component: TournoiDetailsComponent, canActivate: [authGuard]  },
-  { path: 'profil/:id', component: UserSettingsComponent, canActivate: [authGuard]  },
+  { path: 'profil', component: UserSettingsComponent, canActivate: [authGuard]  },
 ];
 
 @NgModule({
