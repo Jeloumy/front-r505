@@ -1,1 +1,10 @@
-<p>user-settings works!</p>
+<form (ngSubmit)="updateProfile()">
+  <div class="form-group">
+    <label for="pseudo">Pseudo</label>
+    <input type="text" class="form-control" id="pseudo" [(ngModel)]="user.pseudo" name="pseudo">
+  </div>
+  <button type="submit" class="btn btn-primary">Mettre à jour</button>
+</form>
+
+<a (click)="onChangePassword()">Changer de mot de passe</a>
+<a (click)="onDeleteAccount()">Supprimer le compte</a>
