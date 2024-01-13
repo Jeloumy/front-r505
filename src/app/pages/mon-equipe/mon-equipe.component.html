@@ -1,1 +1,42 @@
-<p>mon-equipe works!</p>
+<app-menu></app-menu>
+<div *ngIf="team; else noTeamTemplate">
+  <!-- Affichage de l'équipe de l'utilisateur -->
+  <h2>Mon Équipe: {{ team.name }}</h2>
+  <p>Description: {{ team.description }}</p>
+
+  <!-- Liste des membres de l'équipe -->
+  <div>
+    <h3>Membres de l'équipe:</h3>
+    <ul>
+      <li *ngFor="let user of team.users">
+        {{ user.pseudo }} <span *ngIf="user.id === team.captain_id">⭐</span>
+      </li>
+    </ul>
+  </div>
+
+  <!-- Options pour le capitaine -->
+  <div *ngIf="isCaptain">
+    <button (click)="openTeamSettings()">Paramètres de l'équipe</button>
+    <!-- Autres actions pour le capitaine -->
+  </div>
+
+  <!-- Tournois associés à l'équipe -->
+  <div *ngIf="team.tournoi && team.tournoi.length > 0">
+    <h3>Tournois:</h3>
+    <ul>
+      <li *ngFor="let tournament of team.tournoi">
+        {{ tournament.name }}
+        <!-- Ici, affichez plus de détails sur le tournoi si nécessaire -->
+      </li>
+    </ul>
+  </div>
+</div>
+
+<ng-template #noTeamTemplate>
+  <div class="create-team-message">
+    <p>Tout commence ici, cliquez pour créer votre propre équipe</p>
+    <button (click)="createTeam()">Créer une équipe</button>
+    <!-- Ici, placez une icône ou une image si vous le souhaitez -->
+  </div>
+</ng-template>
+
