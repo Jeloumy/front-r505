@@ -9,6 +9,7 @@ import {JeuComponent} from "./pages/jeu/jeu.component";
 import { SearchComponent } from "./pages/search/search.component";
 import {TournoiDetailsComponent} from "./pages/tournoi-details/tournoi-details.component";
 import { UserSettingsComponent } from './pages/user-settings/user-settings.component';
+import {MonEquipeComponent} from "./pages/mon-equipe/mon-equipe.component";
 
 const routes: Routes = [
   { path: '', component: AccueilComponent},
@@ -18,6 +19,7 @@ const routes: Routes = [
   { path: 'jeu', component: JeuComponent, canActivate: [authGuard]  },
   { path: 'search/:req', component: SearchComponent, canActivate: [authGuard]   },
   { path: 'tournoi-details/:id', component: TournoiDetailsComponent, canActivate: [authGuard]  },
+  { path: 'mon-equipe', component: MonEquipeComponent, canActivate: [authGuard]  },
   { path: 'profil', component: UserSettingsComponent, canActivate: [authGuard]  },
 ];
 

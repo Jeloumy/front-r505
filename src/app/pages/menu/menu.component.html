@@ -17,6 +17,8 @@
       <!-- Afficher Inscription seulement pour les utilisateurs non connectés -->
       <li *ngIf="!apiService.isLogged()"><a routerLink="/inscription">Inscription</a></li>
 
+      <li *ngIf="apiService.isLogged()"><a routerLink="/mon-equipe">Mon Équipe</a></li>
+
       <li><a routerLink="/tournoi">Création de tournoi</a></li>
 
       <!-- Afficher seulement pour les administrateurs -->
