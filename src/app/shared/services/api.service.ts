@@ -169,6 +169,19 @@ export class ApiService {
   public savAdmin(adminValue: string) {
     localStorage.setItem('admin', adminValue);
   }
+
+  updateProfile(userData: any): Observable<any> {
+    return this.http.put(API_URL + '/auth/updateProfile', userData);
+  }
+
+  changePassword(passwordData: any): Observable<any> {
+    return this.http.put(API_URL + '/auth/updatePassword', passwordData);
+  }
+
+  deleteAccount(): Observable<any> {
+    return this.http.delete(API_URL + '/auth/deleteAccount');
+  }
+
   logout() {
     localStorage.removeItem('apiToken');
     this.token = undefined;
