@@ -21,6 +21,7 @@ import { TournoiItemComponent } from './pages/tournoi-item/tournoi-item.componen
 import { TournoiDetailsComponent } from './pages/tournoi-details/tournoi-details.component';
 import { SafeUrlPipe } from './pipes/safe-url/safe-url.pipe';
 import { UserSettingsComponent } from './pages/user-settings/user-settings.component';
+import { MonEquipeComponent } from './pages/mon-equipe/mon-equipe.component';
 
 
 @NgModule({
@@ -38,7 +39,8 @@ import { UserSettingsComponent } from './pages/user-settings/user-settings.compo
     TournoiItemComponent,
     TournoiDetailsComponent,
     SafeUrlPipe,
-    UserSettingsComponent
+    UserSettingsComponent,
+    MonEquipeComponent
   ],
   imports: [
     BrowserModule,
