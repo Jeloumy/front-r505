@@ -22,6 +22,7 @@ import { TournoiDetailsComponent } from './pages/tournoi-details/tournoi-details
 import { SafeUrlPipe } from './pipes/safe-url/safe-url.pipe';
 import { UserSettingsComponent } from './pages/user-settings/user-settings.component';
 import { MonEquipeComponent } from './pages/mon-equipe/mon-equipe.component';
+import { CreateTeamComponent } from './pages/create-team/create-team.component';
 
 
 @NgModule({
@@ -40,7 +41,8 @@ import { MonEquipeComponent } from './pages/mon-equipe/mon-equipe.component';
     TournoiDetailsComponent,
     SafeUrlPipe,
     UserSettingsComponent,
-    MonEquipeComponent
+    MonEquipeComponent,
+    CreateTeamComponent
   ],
   imports: [
     BrowserModule,

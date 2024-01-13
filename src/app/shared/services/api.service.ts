@@ -207,6 +207,10 @@ export class ApiService {
     return this.requestApi(`/auth/${userId}`, 'DELETE');
   }
 
+  createTeam(teamData: any): Promise<any> {
+    return this.requestApi('/team', 'POST', teamData);
+  }
+
   logout() {
     localStorage.removeItem('apiToken');
     this.token = undefined;
