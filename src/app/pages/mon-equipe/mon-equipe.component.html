@@ -8,8 +8,8 @@
       <div class="tournaments w-full md:w-1/2">
         <h3 class="font-semibold mb-2">L'équipe participe à ces tournois:</h3>
         <ul>
-          <li *ngFor="let tournament of team.tournoi">
-            {{ tournament.name }}
+          <li *ngFor="let tournoi of team.tournoi">
+            <app-tournoi-item [tournoi]="tournoi"></app-tournoi-item>
           </li>
         </ul>
       </div>

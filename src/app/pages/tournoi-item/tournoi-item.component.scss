@@ -1,0 +1,51 @@
+
+$primary-color: #F21D56;
+$secondary-color: #145873;
+$accent-color: #35BDF2;
+$background-color: #0F1921;
+$text-color: white;
+$highlight-color: #F2955E;
+
+.tournoi-item {
+  background-color: $background-color;
+  color: $text-color;
+  border-radius: 10px;
+  padding: 15px;
+  margin-bottom: 15px;
+  cursor: pointer;
+  transition: transform 0.3s;
+
+  &:hover {
+    transform: translateY(-5px);
+  }
+
+  .stream-preview {
+    .stream-img, .default-img {
+      width: 100%;
+      border-radius: 5px;
+    }
+  }
+
+  .tournoi-info {
+    margin-top: 10px;
+
+    .tournoi-name {
+      color: $primary-color;
+      margin-bottom: 5px;
+    }
+
+    .tournoi-description {
+      color: $text-color;
+    }
+  }
+
+  .registration-button {
+    background-color: $accent-color;
+    color: $text-color;
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-align: center;
+    margin-top: 10px;
+    display: block;
+  }
+}
