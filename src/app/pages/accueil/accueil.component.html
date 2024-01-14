@@ -1,7 +1,41 @@
+<!--<app-menu></app-menu>
+
+
+<div class="carrousel">
+  <div *ngFor="let tournoi of tournoisCarrousel" (click)="naviguerVersDetailsTournoi(tournoi.id)">
+    <app-tournoi-item [tournoi]="tournoi"></app-tournoi-item>
+  </div>
+</div>
+
+<div class="tournois-recommandes">
+  <h2>Tournois Recommandés</h2>
+  <div class="grid-container">
+    <div *ngFor="let tournoi of tournoisRecommandes" (click)="naviguerVersDetailsTournoi(tournoi.id)">
+      <app-tournoi-item [tournoi]="tournoi"></app-tournoi-item>
+    </div>
+  </div>
+</div>
+
+<div class="jeux">
+  <div *ngFor="let jeu of jeux" (click)="rechercherParJeu(jeu.id, jeu.name)">
+    <img [src]="jeu.image" alt="{{ jeu.name }}" class="jeu-image">
+    <p>{{ jeu.name }}</p>
+  </div>
+</div>-->
+
 <app-menu></app-menu>
+<div class="cards-container">
+  <!-- Carte pour accéder à Mon Équipe -->
+  <div class="card" (click)="naviguerVers('mon-equipe')">
+    <h3>Mon Équipe</h3>
+    <p>Accédez à la page de votre équipe.</p>
+
+  </div>
+  <!-- Carte pour accéder au Profil Utilisateur -->
+  <div class="card" (click)="naviguerVers('profil')">
+    <h3>Profil</h3>
+    <p>Accédez à vos paramètres utilisateur.</p>
+  </div>
+</div>
 
 
-
-
-
-<p>accueil works!</p>

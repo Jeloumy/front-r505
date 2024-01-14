@@ -1,0 +1,22 @@
+<app-menu></app-menu>
+<div class="flex justify-center items-center min-h-screen bg-custom-bg-color">
+
+<form (ngSubmit)="onSubmit()">
+  <h2 class="text-2xl font-semibold text-center">Création d'une équipe</h2>
+  <br> <br>
+  <div>
+    <label for="name">Nom de l'équipe</label>
+    <input type="text" id="name" [(ngModel)]="team.name" name="name" required>
+  </div>
+  <div>
+    <label for="description">Description</label>
+    <textarea id="description" [(ngModel)]="team.description" name="description"></textarea>
+  </div>
+
+  <app-image-uploader (fileChanged)="onFileChange($event)"></app-image-uploader>
+<br> <br>
+  <div class="text-center col-span-2">
+    <button type="submit" class="btn btn-primary">Créer l'équipe</button>
+  </div>
+</form>
+</div>
