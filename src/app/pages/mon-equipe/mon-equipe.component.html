@@ -1,42 +1,40 @@
+<div class="bg-custom-bg-color">
 <app-menu></app-menu>
-<div *ngIf="team; else noTeamTemplate">
-  <!-- Affichage de l'équipe de l'utilisateur -->
-  <h2>Mon Équipe: {{ team.name }}</h2>
-  <p>Description: {{ team.description }}</p>
+<br> <br> <br> <br>
+<div class="flex justify- min-h-screen bg-custom-bg-color">
+  <div class="container" *ngIf="team; else noTeamTemplate">
 
-  <!-- Liste des membres de l'équipe -->
-  <div>
-    <h3>Membres de l'équipe:</h3>
-    <ul>
-      <li *ngFor="let user of team.users">
-        {{ user.pseudo }} <span *ngIf="user.id === team.captain_id">⭐</span>
-      </li>
-    </ul>
+    <div class="flex flex-col md:flex-row justify-between">
+      <div class="tournaments w-full md:w-1/2">
+        <h3 class="font-semibold mb-2">L'équipe participe à ces tournois:</h3>
+        <ul>
+          <li *ngFor="let tournoi of team.tournoi">
+            <app-tournoi-item [tournoi]="tournoi"></app-tournoi-item>
+          </li>
+        </ul>
+      </div>
+
+      <div class="text-center members w-full md:w-1/2 md:ml-4">
+        <h2 class="text-2xl font-bold text-center mb-4">Votre équipe : {{ team.name }}</h2>
+        <h3 class="font-semibold mb-2">Membres de l'équipe:</h3>
+        <ul>
+          <li *ngFor="let user of team.users">
+            {{ user.pseudo }} <span *ngIf="user.id === team.captain_id">⭐</span>
+          </li>
+        </ul>
+        <div *ngIf="isCaptain" class="actions mt-4">
+          <button (click)="openTeamSettings()" class="btn btn-primary">Paramètres de l'équipe</button>
+        </div>
+      </div>
+    </div>
   </div>
 
-  <!-- Options pour le capitaine -->
-  <div *ngIf="isCaptain">
-    <button (click)="openTeamSettings()">Paramètres de l'équipe</button>
-    <!-- Autres actions pour le capitaine -->
-  </div>
-
-  <!-- Tournois associés à l'équipe -->
-  <div *ngIf="team.tournoi && team.tournoi.length > 0">
-    <h3>Tournois:</h3>
-    <ul>
-      <li *ngFor="let tournament of team.tournoi">
-        {{ tournament.name }}
-        <!-- Ici, affichez plus de détails sur le tournoi si nécessaire -->
-      </li>
-    </ul>
-  </div>
+  <ng-template #noTeamTemplate>
+    <div class="create-team-message">
+      <p>Tout commence ici, cliquez pour créer votre propre équipe</p>
+      <br><br>
+      <button (click)="createTeam()" class="btn btn-primary">Créer une équipe</button>
+    </div>
+  </ng-template>
 </div>
-
-<ng-template #noTeamTemplate>
-  <div class="create-team-message">
-    <p>Tout commence ici, cliquez pour créer votre propre équipe</p>
-    <button (click)="createTeam()">Créer une équipe</button>
-    <!-- Ici, placez une icône ou une image si vous le souhaitez -->
-  </div>
-</ng-template>
-
+</div>
