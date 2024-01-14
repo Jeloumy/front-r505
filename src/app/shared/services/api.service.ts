@@ -63,23 +63,6 @@ export class ApiService {
     return userId;
   }
 
-  getTeamByUserId(userId: string | undefined): Promise<any> {
-    return this.requestApi(`/team/team/user/${userId}`);
-  }
-
-  addUserToTeam(teamId: string, userId: string): Promise<any> {
-    return this.requestApi(`/team/${teamId}/add-user`, 'POST', { user_id: userId });
-  }
-
-  getTournamentsByTeam(teamId: string): Promise<any> {
-    return this.requestApi(`/team/${teamId}/tournois`);
-  }
-
-  addTeamToTournament(tournamentId: string, teamId: string): Promise<any> {
-    return this.requestApi(`/tournoi/${tournamentId}/register-team`, 'POST', { team_id: teamId });
-  }
-
-
   login(loginData: any): Promise<any> {
     return this.requestApi('/auth/login', 'POST', loginData).then(response => {
       if (response && response.token) {
@@ -91,15 +74,9 @@ export class ApiService {
     });
   }
 
-
-
-
-
   tournoi(tournamentData: any) {
     return this.requestApi('/tournoi', 'POST', tournamentData);
   }
-
-
 
   uploadFile(formData: any) {
     const headers = new HttpHeaders({
@@ -107,9 +84,6 @@ export class ApiService {
     });
     return this.requestApi('/jeu', 'POST', formData, { headers });
   }
-
-
-
 
   public async requestApi(action: string, method: string = 'GET', datas: any = {}, httpOptions: any = {}): Promise<any> {
     // if (!this.onlineStatusService.getIsOnline()) {
@@ -216,6 +190,39 @@ export class ApiService {
     };
     return this.requestApi('/team', 'POST', teamData, httpOptions);
   }
+
+  updateTeam(teamId: string, teamData: FormData): Promise<any> {
+    return this.requestApi(`/team/${teamId}`, 'PUT', teamData);
+  }
+
+  deleteTeam(teamId: string): Promise<any> {
+    return this.requestApi(`/team/${teamId}`, 'DELETE');
+  }
+
+  getTeamByUserId(userId: string | undefined): Promise<any> {
+    return this.requestApi(`/team/team/user/${userId}`);
+  }
+
+  addUserToTeam(teamId: string, pseudo: string | undefined): Promise<any> {
+    return this.requestApi(`/team/${teamId}/add-user`, 'POST', { pseudo });
+  }
+
+  getTeamById(teamId: string): Promise<any> {
+    return this.requestApi(`/team/${teamId}`);
+  }
+
+  getTournamentsByTeam(teamId: string): Promise<any> {
+    return this.requestApi(`/team/${teamId}/tournois`);
+  }
+
+  addTeamToTournament(tournamentId: string, teamId: string): Promise<any> {
+    return this.requestApi(`/tournoi/${tournamentId}/register-team`, 'POST', { team_id: teamId });
+  }
+
+  setTeamCaptain(teamId: string, newCaptainPseudo: string | undefined): Promise<any> {
+    return this.requestApi(`/team/${teamId}/set-captain`, 'PUT', { newCaptainPseudo });
+  }
+
 
 
   logout() {
