@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { SearchComponent } from '../search/search.component';
 import {Router} from "@angular/router";
+import { ApiService } from '../../shared/services/api.service';
 
 
 @Component({
@@ -11,11 +12,21 @@ import {Router} from "@angular/router";
 export class MenuComponent  {
   searchTerm: string = '';
 
-  constructor(
-    private router: Router
+  constructor(protected apiService: ApiService, private router: Router
   ) {}
 
   onSearch() {
     this.router.navigate(['/search/'+this.searchTerm]);
   }
+
+  onLogout() {
+    this.apiService.logout().then(() => {
+      this.router.navigate(['/']).then(() => {
+        window.location.reload();
+      });
+    }).catch((error: any) => {
+      console.error(error);
+    });
+  }
+
 }

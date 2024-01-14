@@ -1,15 +1,14 @@
-<div class="tournoi-item" (click)="navigateToTournoi(tournoi.id)">
+<div class="tournoi-item bg-background-color text-text-color" (click)="navigateToTournoi(tournoi.id)">
   <div *ngIf="tournoi.stream_url; else defaultImage" class="stream-preview">
-    <img src="vignette" alt="Aperçu du stream">
+    <img src="{{ tournoi.stream_url }}" alt="Aperçu du stream" class="stream-img">
   </div>
   <ng-template #defaultImage>
-    <img src="defaut" alt="Image par défaut">
+  <img src="path_to_default_image" alt="Image par défaut" class="default-img">
   </ng-template>
 
   <div class="tournoi-info">
-    <h3>{{ tournoi.name }}</h3>
-    <p>{{ tournoi.description }}</p>
-
+    <h3 class="tournoi-name">Nom : {{ tournoi.name }}</h3>
+    <p class="tournoi-description">Description : {{ tournoi.description }}</p>
   </div>
 </div>
-
+<app-tournament-registration-button [tournoiId]="tournoi.id" [teamId]="teamId" class="registration-button"></app-tournament-registration-button>
