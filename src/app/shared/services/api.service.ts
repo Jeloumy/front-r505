@@ -193,8 +193,10 @@ export class ApiService {
   }
 
   updateTeam(teamId: string, teamData: FormData): Promise<any> {
+    console.log(`Mise à jour de l'équipe avec ID: ${teamId}`, teamData);
     return this.requestApi(`/team/${teamId}`, 'PUT', teamData);
   }
+
 
   deleteTeam(teamId: string): Promise<any> {
     return this.requestApi(`/team/${teamId}`, 'DELETE');

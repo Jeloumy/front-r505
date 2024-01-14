@@ -1,48 +1,44 @@
 <app-menu></app-menu>
-<div class="team-settings" *ngIf="team">
+<div class="team-settings" >
   <h2>Paramètres de l'équipe : {{ team.name }}</h2>
 
   <!-- Formulaire de mise à jour du nom -->
-  <form (ngSubmit)="updateTeamName(teamName.value)">
+  <form [formGroup]="teamNameForm" (ngSubmit)="updateTeamName()">
     <div class="form-group">
       <label for="teamName">Nom de l'équipe</label>
-      <input type="text" id="teamName" #teamName placeholder="Nouveau nom de l'équipe">
+      <input type="text" id="teamName" formControlName="teamName" placeholder="Nouveau nom de l'équipe">
       <button type="submit">Mettre à jour le nom</button>
     </div>
-  </form>
 
+  </form>
   <!-- Formulaire de mise à jour de la description -->
-  <form (ngSubmit)="updateTeamDescription(teamDescription.value)">
+  <form [formGroup]="teamDescriptionForm" (ngSubmit)="updateTeamDescription()">
     <div class="form-group">
       <label for="teamDescription">Description</label>
-      <textarea id="teamDescription" #teamDescription placeholder="Nouvelle description"></textarea>
+      <textarea id="teamDescription" formControlName="teamDescription" placeholder="Nouvelle description"></textarea>
       <button type="submit">Mettre à jour la description</button>
     </div>
   </form>
-
   <!-- Formulaire de mise à jour du logo -->
-  <form (ngSubmit)="updateTeamLogo()">
+  <form [formGroup]="teamLogoForm" (ngSubmit)="updateTeamLogo()">
     <div class="form-group">
       <label for="teamLogo">Logo</label>
-      <input type="file" id="teamLogo" (change)="onFileChange($event)">
+      <input type="file" id="teamLogo" formControlName="teamLogo" (change)="onFileChange($event)">
       <button type="submit">Mettre à jour le logo</button>
     </div>
   </form>
-
   <!-- Ajouter un utilisateur -->
   <div>
     <h3>Ajouter un membre</h3>
     <input type="text" [(ngModel)]="newMemberPseudo" placeholder="Pseudo de l'utilisateur">
     <button (click)="addUserToTeam()">Ajouter</button>
   </div>
-
   <!-- Changer de capitaine -->
   <div>
     <h3>Changer le capitaine</h3>
     <input type="text" [(ngModel)]="newCaptainPseudo" placeholder="Pseudo du nouveau capitaine">
-    <button (click)="setTeamCaptain(newCaptainPseudo)">Changer le capitaine</button>
+    <button (click)="setTeamCaptain()">Changer le capitaine</button>
   </div>
-
   <!-- Supprimer l'équipe -->
   <div>
     <button (click)="deleteTeam()">Supprimer l'équipe</button>
