@@ -1,0 +1,112 @@
+// Styles de base pour la barre de navigation, inspirés par Twitch avec des ajustements personnalisés
+.navbar {
+  padding: 0.25rem 1rem; // Réduisez le padding vertical pour diminuer la hauteur
+  // ... autres styles ...
+
+  .navbar-start, .navbar-center, .navbar-end {
+    // Assurez-vous que les éléments enfants ne dépassent pas la hauteur désirée
+    align-items: center; // Centre verticalement les éléments enfants
+  }
+
+  .menu-horizontal li a, .dropdown .btn {
+    padding: 0.25rem 1rem; // Réduisez également le padding vertical des liens et des boutons
+  }
+
+  .input, .btn {
+    height: auto; // Réduisez la hauteur ou ajustez selon les besoins
+    padding: 0.25rem 0.5rem; // Réduisez le padding pour les éléments input et bouton
+  }
+
+  // Vous pouvez également vouloir ajuster la taille du texte et des icônes si nécessaire
+  font-size: 0.875rem; // Exemple de réduction de la taille de la police
+}
+
+
+.navbar {
+  background-color: #1f2937; // Fond foncé (gris foncé/bleu marine)
+  color: #f9fafb; // Texte clair
+  padding: 0.5rem 1rem;
+  border-radius: 0; // Suppression des arrondis
+
+  .navbar-start {
+    .logo {
+      width: 100px; /* ou la taille que vous désirez */
+      height: auto; /* pour maintenir le ratio aspect */
+    }
+  }
+
+
+
+  .navbar-center {
+    .flex { // Conteneur de la barre de recherche
+      background-color: transparent; // Suppression du fond blanc
+      border: none; // Suppression de la bordure si nécessaire
+
+      .input {
+        background-color: transparent; // Fond transparent pour l'input
+        color: white; // Couleur du texte (ajustez selon votre design)
+
+        &:focus {
+          outline: none;
+          border-color: #4f46e5; // Couleur de la bordure au focus
+        }
+
+        .fa-search {
+          color: #4f46e5; // Exemple de changement de couleur
+          font-size: 1.5rem; // Exemple de changement de taille
+        }
+      }
+
+    }
+
+    .btn {
+      background-color: #6366f1; // Nouvelle couleur pour le bouton
+
+      padding: 0.5rem 1rem;
+      border-radius: 0; // Suppression des arrondis pour le bouton
+      font-weight: bold;
+      &:hover {
+        background-color: #4f46e5; // Légère variation au survol
+      }
+    }
+  }
+
+  .navbar-end {
+    // Styles pour la section de droite
+    .menu {
+      .menu-horizontal {
+        display: flex;
+        align-items: center;
+        padding: 0;
+
+        li {
+          list-style: none;
+
+          a {
+            display: block;
+            padding: 0.5rem 1rem;
+            transition: background-color 0.3s, color 0.3s;
+            &:hover {
+              background-color: #4f46e5; // Bleu/violet clair au survol
+              color: white;
+            }
+          }
+        }
+      }
+    }
+
+    .dropdown {
+      .dropdown-content {
+        background-color: #1f2937; // Fond foncé
+        border-radius: 0; // Suppression des arrondis
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.25);
+        a {
+          color: #f9fafb;
+          &:hover {
+            background-color: #4f46e5; // Bleu/violet clair au survol
+          }
+        }
+      }
+    }
+  }
+}
