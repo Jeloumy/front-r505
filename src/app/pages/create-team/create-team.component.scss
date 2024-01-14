@@ -1,0 +1,45 @@
+$primary-color: #F21D56;
+$secondary-color: #145873;
+$accent-color: #35BDF2;
+$background-color: #0F1921;
+$text-color: white;
+$highlight-color: #F2955E;
+
+form {
+  background-color: $background-color; /* Couleur d'arrière-plan du formulaire */
+  color: $text-color; /* Couleur du texte dans le formulaire */
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+label {
+  color: $text-color; /* Couleur du texte des étiquettes */
+}
+
+input[type="text"],
+textarea {
+  background-color: transparent; /* Fond transparent pour les champs de texte */
+  border: 1px solid $accent-color; /* Bordure avec la couleur d'accentuation */
+  color: $text-color; /* Couleur du texte dans les champs de texte */
+  padding: 10px;
+  border-radius: 4px;
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+button[type="submit"] {
+  background-color: $primary-color; /* Couleur principale pour le bouton de soumission */
+  color: $text-color; /* Couleur du texte du bouton de soumission */
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  align-items: center;
+}
+
+button[type="submit"]:hover {
+  background-color: $highlight-color; /* Couleur de surbrillance au survol du bouton */
+}
+
+/* Personnalisez les styles de l'app-image-uploader selon vos besoins */

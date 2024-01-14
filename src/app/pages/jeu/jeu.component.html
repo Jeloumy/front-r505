@@ -1,0 +1,9 @@
+<app-menu></app-menu>
+<form [formGroup]="uploadForm" (ngSubmit)="onSubmit()">
+  <app-image-uploader (fileChanged)="onFileChanged($event)"></app-image-uploader>
+
+  <label for="name">Nom :</label>
+  <input type="text" id="name" formControlName="name">
+
+  <button type="submit">Envoyer</button>
+</form>

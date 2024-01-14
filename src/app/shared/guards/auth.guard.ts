@@ -1,6 +1,7 @@
 import {ActivatedRouteSnapshot, CanActivateFn, Router, RouterStateSnapshot} from '@angular/router';
 import {inject, Injectable} from "@angular/core";
 import {ApiService} from "../services/api.service";
+import { take } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root',
@@ -15,7 +16,13 @@ export class AuthService {
   // Vérifie si l'utilisateur est connecté
   private checkLogin(state: RouterStateSnapshot): boolean {
     this.url = state.url;
-    if (this.apiService.isLogged()) {
+    let isLogged: boolean;
+    this.apiService.isLoggedIn.pipe(take(1)).subscribe(loggedIn => {
+      isLogged = loggedIn;
+    });
+
+    // @ts-ignore
+    if (isLogged) {
       return this.authState();
     }
     return this.noAuthState();
@@ -50,7 +57,7 @@ export class AuthService {
   // Vérifie si l'utilisateur est connecté avant d'accéder à la page
   async canActivate(next: ActivatedRouteSnapshot, state: RouterStateSnapshot): Promise<boolean> {
     if (!this.apiService.isInit) {
-      await this.apiService.initEvent.subscribe(() => true);
+      this.apiService.initEvent.subscribe(() => true);
     }
     return this.checkLogin(state);
   }

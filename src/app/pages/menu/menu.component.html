@@ -1,0 +1,39 @@
+<div class="navbar bg-gray-100 shadow-lg rounded-lg">
+  <div class="navbar-start">
+    <a routerLink="/">
+<img class="logo" src="assets/img/Troubadours.png">
+    </a>
+  </div>
+
+    <div class="navbar-center">
+      <div class="flex items-center gap-2 p-2 bg-white rounded-lg border border-gray-300">
+        <input type="text" placeholder="Rechercher un tournoi..." class="input input-bordered w-full rounded-lg" [(ngModel)]="searchTerm" />
+        <button (click)="onSearch()" class="btn-search">
+          <i class="fas fa-search"></i>
+        </button>
+      </div>
+    </div>
+
+  <div class="navbar-end">
+    <ul class="menu menu-horizontal p-0">
+      <li *ngIf="!apiService.isLogged()"><a routerLink="/connexion" class="btn-connexion">Connexion</a></li>
+      <li *ngIf="!apiService.isLogged()"><a routerLink="/inscription" class="btn-inscription">Inscription</a></li>
+      <li *ngIf="apiService.isLogged()"><a routerLink="/mon-equipe" class="rounded-lg px-4 py-2 hover:bg-blue-500 hover:text-white">Mon Équipe</a></li>
+      <li *ngIf="apiService.isLogged()"><a routerLink="/tournoi" class="rounded-lg px-4 py-2 hover:bg-blue-500 hover:text-white">Création de tournoi</a></li>
+      <li *ngIf="apiService.isAdmin()"><a routerLink="/jeu" class="rounded-lg px-4 py-2 hover:bg-blue-500 hover:text-white">Création de jeu</a></li>
+      <div *ngIf="apiService.isLogged()" class="dropdown dropdown-end">
+        <div tabindex="0" role="button" class="btn btn-ghost btn-circle avatar">
+          <div class="w-10 rounded-full">
+            <img alt="Profil" src="https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg" />
+          </div>
+        </div>
+        <ul tabindex="0" class="mt-3 z-[1] p-2 shadow menu menu-sm dropdown-content bg-base-100 rounded-box w-52">
+          <li><a routerLink="/profil" class="rounded-lg px-4 py-2 hover:bg-blue-500 hover:text-white">Profil</a></li>
+          <li><a (click)="onLogout()" class="rounded-lg px-4 py-2 hover:bg-blue-500 hover:text-white">Déconnexion</a></li>
+        </ul>
+      </div>
+    </ul>
+  </div>
+</div>
+
+

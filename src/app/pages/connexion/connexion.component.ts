@@ -29,6 +29,8 @@ export class ConnexionComponent {
         (response) => {
           // Traiter la réponse, gérer le token, rediriger vers la page d'accueil, etc.
           console.log(response);
+          console.log(response.admin);
+          this.apiService.savAdmin(response.admin);
           this.apiService.savTokens(response.token);
           this.router.navigate(['']);
         },
