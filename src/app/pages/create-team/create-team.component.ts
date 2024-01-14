@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { ApiService } from '../../shared/services/api.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-create-team',
@@ -13,7 +14,7 @@ export class CreateTeamComponent {
     logo: null
   };
 
-  constructor(private apiService: ApiService) {}
+  constructor(private apiService: ApiService, private router : Router ) {}
 
   onFileChange(file: File | null) {
     // @ts-ignore
@@ -37,7 +38,7 @@ export class CreateTeamComponent {
 
     this.apiService.createTeam(formData).then(response => {
       console.log('Équipe créée avec succès:', response);
-      // Gérer la réponse
+      this.router.navigate(['']);
     }).catch(error => {
       console.error('Erreur lors de la création de l\'équipe:', error);
       // Gérer l'erreur
