@@ -1,7 +1,11 @@
 <form [formGroup]="inscriptionForm" (submit)="submitInscription()">
   <div class="form-group">
-    <label for="name">Nom</label>
+    <label for="name">Prénom</label>
     <input type="text" id="name" formControlName="name" class="form-control" required>
+  </div>
+  <div class="form-group">
+    <label for="last_name">Nom</label>
+    <input type="text" id="last_name" formControlName="last_name" class="form-control" required>
   </div>
   <div class="form-group">
     <label for="email">Email</label>

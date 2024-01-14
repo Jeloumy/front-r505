@@ -17,6 +17,7 @@ export class InscriptionComponent {
   constructor(private apiService: ApiService, private router: Router, private fb: FormBuilder) {
     this.inscriptionForm = this.fb.group({
       name: ['', Validators.required],
+      last_name: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
       pseudo: ['', Validators.required],
       password: ['', Validators.required],
