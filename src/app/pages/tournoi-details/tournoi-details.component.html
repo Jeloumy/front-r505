@@ -1,0 +1,7 @@
+<app-menu></app-menu>
+<div *ngIf="tournoi">
+  <h2>{{ tournoi.name }}</h2>
+  <p>{{ tournoi.description }}</p>
+  <!-- Afficher le stream si disponible -->
+  <iframe *ngIf="tournoi.stream_url" [src]="tournoi.stream_url | safeUrl" width="560" height="315" frameborder="0" allowfullscreen></iframe>
+</div>
