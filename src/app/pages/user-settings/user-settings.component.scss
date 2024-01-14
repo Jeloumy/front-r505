@@ -1,0 +1,74 @@
+$primary-color: #F21D56;
+$secondary-color: #145873;
+$accent-color: #35BDF2;
+$background-color: #0F1921;
+$text-color: #F2D6BD;
+$highlight-color: #F2955E;
+
+.container {
+  max-width: 800px;
+  margin: auto;
+
+  .card {
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-top: 1rem;
+
+    .card-header {
+      padding: 1rem;
+      background-color: $secondary-color;
+      color: white;
+      border-top-left-radius: 8px;
+      border-top-right-radius: 8px;
+
+      h3 {
+        margin: 0;
+      }
+    }
+
+    .card-body {
+      padding: 1rem;
+
+      .form-group {
+        margin-bottom: 1rem;
+
+        label {
+          display: block;
+          margin-bottom: 0.5rem;
+        }
+
+        .form-control {
+          width: 100%;
+          padding: 0.5rem;
+          border: 1px solid $secondary-color;
+          border-radius: 4px;
+        }
+      }
+
+      .btn-primary {
+        background-color: $primary-color;
+        color: white;
+        padding: 0.5rem 1rem;
+        border-radius: 4px;
+        width: 100%;
+
+        &:hover {
+          background-color: darken($primary-color, 10%);
+        }
+      }
+
+      .btn-danger {
+        background-color: $highlight-color;
+        color: white;
+        padding: 0.5rem 1rem;
+        border-radius: 4px;
+        width: 100%;
+
+        &:hover {
+          background-color: darken($highlight-color, 10%);
+        }
+      }
+    }
+  }
+}
