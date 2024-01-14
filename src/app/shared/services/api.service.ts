@@ -215,15 +215,9 @@ export class ApiService {
     return this.requestApi(`/team/${teamId}/tournois`);
   }
 
-  addTeamToTournament(tournamentId: string, teamId: string): Promise<any> {
-    return this.requestApi(`/tournoi/${tournamentId}/register-team`, 'POST', { team_id: teamId });
-  }
-
   setTeamCaptain(teamId: string, newCaptainPseudo: string | undefined): Promise<any> {
     return this.requestApi(`/team/${teamId}/set-captain`, 'PUT', { newCaptainPseudo });
   }
-
-
 
   logout() {
     localStorage.removeItem('apiToken');
@@ -232,5 +226,24 @@ export class ApiService {
     localStorage.removeItem('userId');
     this.isAuthenticated.next(false);
     return this.requestApi('/auth/logout'); // Assurez-vous que cela retourne une Promesse
+  }
+
+  addTeamToTournament(tournamentId: string, teamId: string) {
+    const data = {
+      team_id: teamId
+    };
+    const headers = new HttpHeaders({
+      'Authorization': 'Bearer ' + this.token
+    });
+
+    return this.http.post(`/tournoi/${tournamentId}/register-team`, data, { headers });
+  }
+
+  leaveTournament(tournamentId: string) {
+    const headers = new HttpHeaders({
+      'Authorization': 'Bearer ' + this.token
+    });
+
+    return this.http.post(`/tournoi/${tournamentId}/leave-tournament`, null, { headers });
   }
 }
