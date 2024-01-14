@@ -28,36 +28,39 @@ import { TournamentRegistrationButtonComponent } from './pages/tournament-regist
 
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    InscriptionComponent,
-    AccueilComponent,
-    ConnexionComponent,
-    TournoisComponent,
-    JeuComponent,
-    MenuComponent,
-    SearchComponent,
-    ValidFileTypePipe,
-    ImageUploaderComponent,
-    TournoiItemComponent,
-    TournoiDetailsComponent,
-    SafeUrlPipe,
-    UserSettingsComponent,
-    MonEquipeComponent,
-    CreateTeamComponent,
-    TeamSettingsComponent,
-    TournamentRegistrationButtonComponent
-  ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    FormsModule,
-    HttpClientModule,
-    ReactiveFormsModule,
-    MatIconModule,
-    CdkDropList
-  ],
-  providers: [],
-  bootstrap: [AppComponent]
+    declarations: [
+        AppComponent,
+        InscriptionComponent,
+        AccueilComponent,
+        ConnexionComponent,
+        TournoisComponent,
+        JeuComponent,
+        MenuComponent,
+        SearchComponent,
+        ValidFileTypePipe,
+        ImageUploaderComponent,
+        TournoiItemComponent,
+        TournoiDetailsComponent,
+        SafeUrlPipe,
+        UserSettingsComponent,
+        MonEquipeComponent,
+        CreateTeamComponent,
+        TeamSettingsComponent,
+        TournamentRegistrationButtonComponent
+    ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        FormsModule,
+        HttpClientModule,
+        ReactiveFormsModule,
+        MatIconModule,
+        CdkDropList
+    ],
+    providers: [],
+    exports: [
+        MenuComponent
+    ],
+    bootstrap: [AppComponent]
 })
 export class AppModule { }

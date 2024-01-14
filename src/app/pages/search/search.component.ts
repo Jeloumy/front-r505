@@ -20,6 +20,7 @@ export class SearchComponent {
     })
   }
 
+
   searchTournament(searchTerm: string) {
     this.apiService.searchTournament(searchTerm)
       .then((result) => {

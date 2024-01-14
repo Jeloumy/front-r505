@@ -267,5 +267,18 @@ export class ApiService {
     return this.requestApi(`/tournoi/${tournoiId}/leave-tournament`, 'POST', {});
   }
 
+  // Méthodes correspondantes dans ApiService
+
+  getTournoisCarrousel(): Promise<any> {
+    return this.requestApi('/tournoi/carrousel');
+  }
+
+  getTournoisRecommandes(): Promise<any> {
+    return this.requestApi('/tournoi/recommandes');
+  }
+
+  rechercherTournoisParJeu(jeuId: string): Promise<any> {
+    return this.requestApi(`/tournoi/rechercheParJeu/${jeuId}`);
+  }
 
 }
