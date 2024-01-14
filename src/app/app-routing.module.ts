@@ -24,7 +24,8 @@ const routes: Routes = [
   { path: 'mon-equipe', component: MonEquipeComponent, canActivate: [authGuard]  },
   { path: 'profil', component: UserSettingsComponent, canActivate: [authGuard]  },
   { path: 'create-team', component: CreateTeamComponent, canActivate: [authGuard] },
-  { path: 'team-settings', component: TeamSettingsComponent, canActivate: [authGuard] }
+  { path: 'team-settings/:teamId', component: TeamSettingsComponent, canActivate: [authGuard] }
+
 ];
 
 @NgModule({
