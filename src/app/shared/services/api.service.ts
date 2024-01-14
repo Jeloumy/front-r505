@@ -51,8 +51,16 @@ export class ApiService {
 
 
   inscription(userData: any) {
-    // Utilisez HttpClient pour envoyer une requête POST vers l'API Laravel pour l'inscription
-    return this.requestApi('/register', 'POST', userData);
+
+    return this.requestApi('/register', 'POST', userData).then(response => {
+      if (response && response.token) {
+        this.savTokens(response.token);
+        localStorage.setItem('admin', response.isAdmin ? '1' : '0');
+        localStorage.setItem('userId', response.user.id);
+        this.setTeamId(response.teamId); // Stocke l'ID de l'équipe
+      }
+      return response;
+    });
   }
 
   getUserId(): string {

@@ -16,7 +16,6 @@
 
   <div class="navbar-end">
     <ul class="menu menu-horizontal p-0">
-      <li><a routerLink="/" class="rounded-lg px-4 py-2 hover:bg-blue-500 hover:text-white">Accueil</a></li>
       <li *ngIf="!apiService.isLogged()"><a routerLink="/connexion" class="btn-connexion">Connexion</a></li>
       <li *ngIf="!apiService.isLogged()"><a routerLink="/inscription" class="btn-inscription">Inscription</a></li>
       <li *ngIf="apiService.isLogged()"><a routerLink="/mon-equipe" class="rounded-lg px-4 py-2 hover:bg-blue-500 hover:text-white">Mon Équipe</a></li>
@@ -36,3 +35,5 @@
     </ul>
   </div>
 </div>
+
+
