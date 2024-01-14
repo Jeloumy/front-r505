@@ -17,7 +17,7 @@ import { tap } from 'rxjs/operators';
 })
 export class ApiService {
   private apiUrl = API_URL;
-
+  private teamId: string | null = null;
   token?: string;
   isInit: boolean = false;
   initEvent: Subject<boolean> = new Subject<boolean>();
@@ -69,6 +69,7 @@ export class ApiService {
         this.savTokens(response.token);
         localStorage.setItem('admin', response.isAdmin ? '1' : '0');
         localStorage.setItem('userId', response.user.id);
+        this.setTeamId(response.teamId); // Stocke l'ID de l'équipe
       }
       return response;
     });
@@ -215,22 +216,42 @@ export class ApiService {
     return this.requestApi(`/team/${teamId}/tournois`);
   }
 
-  addTeamToTournament(tournamentId: string, teamId: string): Promise<any> {
-    return this.requestApi(`/tournoi/${tournamentId}/register-team`, 'POST', { team_id: teamId });
-  }
-
   setTeamCaptain(teamId: string, newCaptainPseudo: string | undefined): Promise<any> {
     return this.requestApi(`/team/${teamId}/set-captain`, 'PUT', { newCaptainPseudo });
   }
 
-
-
   logout() {
     localStorage.removeItem('apiToken');
     this.token = undefined;
+    this.clearTeamId();
     localStorage.removeItem('admin');
     localStorage.removeItem('userId');
     this.isAuthenticated.next(false);
     return this.requestApi('/auth/logout'); // Assurez-vous que cela retourne une Promesse
   }
+
+  clearTeamId() {
+    this.teamId = null;
+  }
+
+  // Méthode pour définir l'ID de l'équipe
+  setTeamId(id: string) {
+    this.teamId = id;
+  }
+
+  // Méthode pour obtenir l'ID de l'équipe
+  getTeamId(): string | null {
+    return this.teamId;
+  }
+
+  addTeamToTournament(tournoiId: string, teamId: string): Promise<any> {
+    return this.requestApi(`/tournoi/${tournoiId}/register-team`, 'POST', { team_id: teamId });
+  }
+
+
+  leaveTournament(tournoiId: string): Promise<any> {
+    return this.requestApi(`/tournoi/${tournoiId}/leave-tournament`, 'POST', {});
+  }
+
+
 }

@@ -24,6 +24,7 @@ import { UserSettingsComponent } from './pages/user-settings/user-settings.compo
 import { MonEquipeComponent } from './pages/mon-equipe/mon-equipe.component';
 import { CreateTeamComponent } from './pages/create-team/create-team.component';
 import { TeamSettingsComponent } from './pages/team-settings/team-settings.component';
+import { TournamentRegistrationButtonComponent } from './pages/tournament-registration-button/tournament-registration-button.component';
 
 
 @NgModule({
@@ -44,7 +45,8 @@ import { TeamSettingsComponent } from './pages/team-settings/team-settings.compo
     UserSettingsComponent,
     MonEquipeComponent,
     CreateTeamComponent,
-    TeamSettingsComponent
+    TeamSettingsComponent,
+    TournamentRegistrationButtonComponent
   ],
   imports: [
     BrowserModule,
