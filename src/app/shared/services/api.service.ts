@@ -207,9 +207,16 @@ export class ApiService {
     return this.requestApi(`/auth/${userId}`, 'DELETE');
   }
 
-  createTeam(teamData: any): Promise<any> {
-    return this.requestApi('/team', 'POST', teamData);
+  createTeam(teamData: FormData): Promise<any> {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Authorization': 'Bearer ' + this.token,
+        'Accept': 'multipart/form-data' // Peut-être nécessaire pour certains serveurs
+      })
+    };
+    return this.requestApi('/team', 'POST', teamData, httpOptions);
   }
+
 
   logout() {
     localStorage.removeItem('apiToken');
