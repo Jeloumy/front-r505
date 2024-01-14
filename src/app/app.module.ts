@@ -23,6 +23,7 @@ import { SafeUrlPipe } from './pipes/safe-url/safe-url.pipe';
 import { UserSettingsComponent } from './pages/user-settings/user-settings.component';
 import { MonEquipeComponent } from './pages/mon-equipe/mon-equipe.component';
 import { CreateTeamComponent } from './pages/create-team/create-team.component';
+import { TeamSettingsComponent } from './pages/team-settings/team-settings.component';
 
 
 @NgModule({
@@ -42,7 +43,8 @@ import { CreateTeamComponent } from './pages/create-team/create-team.component';
     SafeUrlPipe,
     UserSettingsComponent,
     MonEquipeComponent,
-    CreateTeamComponent
+    CreateTeamComponent,
+    TeamSettingsComponent
   ],
   imports: [
     BrowserModule,
