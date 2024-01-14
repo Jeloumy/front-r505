@@ -21,10 +21,12 @@ export class MenuComponent  {
 
   onLogout() {
     this.apiService.logout().then(() => {
-
-      this.router.navigate(['/']); // Redirige l'utilisateur après la déconnexion
+      this.router.navigate(['/']).then(() => {
+        window.location.reload();
+      });
     }).catch((error: any) => {
       console.error(error);
     });
   }
+
 }

@@ -17,7 +17,7 @@ import { tap } from 'rxjs/operators';
 })
 export class ApiService {
   private apiUrl = API_URL;
-
+  private teamId: string | null = null;
   token?: string;
   isInit: boolean = false;
   initEvent: Subject<boolean> = new Subject<boolean>();
@@ -55,24 +55,29 @@ export class ApiService {
     return this.requestApi('/register', 'POST', userData);
   }
 
+  getUserId(): string {
+    const userId = localStorage.getItem('userId');
+    if (!userId) {
+      throw new Error('ID utilisateur non trouvé');
+    }
+    return userId;
+  }
+
   login(loginData: any): Promise<any> {
     return this.requestApi('/auth/login', 'POST', loginData).then(response => {
       if (response && response.token) {
         this.savTokens(response.token);
-        // Enregistrer l'information isAdmin
         localStorage.setItem('admin', response.isAdmin ? '1' : '0');
+        localStorage.setItem('userId', response.user.id);
+        this.setTeamId(response.teamId); // Stocke l'ID de l'équipe
       }
       return response;
     });
   }
 
-
-
   tournoi(tournamentData: any) {
     return this.requestApi('/tournoi', 'POST', tournamentData);
   }
-
-
 
   uploadFile(formData: any) {
     const headers = new HttpHeaders({
@@ -80,9 +85,6 @@ export class ApiService {
     });
     return this.requestApi('/jeu', 'POST', formData, { headers });
   }
-
-
-
 
   public async requestApi(action: string, method: string = 'GET', datas: any = {}, httpOptions: any = {}): Promise<any> {
     // if (!this.onlineStatusService.getIsOnline()) {
@@ -149,8 +151,6 @@ export class ApiService {
     return this.token !== undefined;
   }
 
-
-
   public get isLoggedIn() {
     return this.isAuthenticated.asObservable();
   }
@@ -169,11 +169,91 @@ export class ApiService {
   public savAdmin(adminValue: string) {
     localStorage.setItem('admin', adminValue);
   }
+
+  updateProfile(userId: string, updateData: any): Promise<any> {
+    return this.requestApi(`/auth/${userId}/2`, 'PUT', updateData);
+  }
+
+  changePassword(userId: string, passwordData: any): Promise<any> {
+    return this.requestApi(`/auth/${userId}/1`, 'PUT', passwordData);
+  }
+
+  deleteAccount(userId: string): Promise<any> {
+    return this.requestApi(`/auth/${userId}`, 'DELETE');
+  }
+
+  createTeam(teamData: FormData): Promise<any> {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Authorization': 'Bearer ' + this.token,
+        'Accept': 'multipart/form-data' // Peut-être nécessaire pour certains serveurs
+      })
+    };
+    return this.requestApi('/team', 'POST', teamData, httpOptions);
+  }
+
+  updateTeam(teamId: string, teamData: FormData): Promise<any> {
+    console.log(`Mise à jour de l'équipe avec ID: ${teamId}`, teamData);
+    return this.requestApi(`/team/${teamId}`, 'PUT', teamData);
+  }
+
+
+  deleteTeam(teamId: string): Promise<any> {
+    return this.requestApi(`/team/${teamId}`, 'DELETE');
+  }
+
+  getTeamByUserId(userId: string | undefined): Promise<any> {
+    return this.requestApi(`/team/team/user/${userId}`);
+  }
+
+  addUserToTeam(teamId: string, pseudo: string | undefined): Promise<any> {
+    return this.requestApi(`/team/${teamId}/add-user`, 'POST', { pseudo });
+  }
+
+  getTeamById(teamId: string): Promise<any> {
+    return this.requestApi(`/team/${teamId}`);
+  }
+
+  getTournamentsByTeam(teamId: string): Promise<any> {
+    return this.requestApi(`/team/${teamId}/tournois`);
+  }
+
+  setTeamCaptain(teamId: string, newCaptainPseudo: string | undefined): Promise<any> {
+    return this.requestApi(`/team/${teamId}/set-captain`, 'PUT', { newCaptainPseudo });
+  }
+
   logout() {
     localStorage.removeItem('apiToken');
     this.token = undefined;
+    this.clearTeamId();
     localStorage.removeItem('admin');
+    localStorage.removeItem('userId');
     this.isAuthenticated.next(false);
     return this.requestApi('/auth/logout'); // Assurez-vous que cela retourne une Promesse
   }
+
+  clearTeamId() {
+    this.teamId = null;
+  }
+
+  // Méthode pour définir l'ID de l'équipe
+  setTeamId(id: string) {
+    this.teamId = id;
+  }
+
+  // Méthode pour obtenir l'ID de l'équipe
+  getTeamId(): string | null {
+    return this.teamId;
+  }
+
+  addTeamToTournament(tournoiId: string, teamId: string): Promise<any> {
+    return this.requestApi(`/tournoi/${tournoiId}/register-team`, 'POST', { team_id: teamId });
+  }
+
+
+  leaveTournament(tournoiId: string): Promise<any> {
+    return this.requestApi(`/tournoi/${tournoiId}/leave-tournament`, 'POST', {});
+  }
+
+
 }
