@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../../shared/services/api.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-mon-equipe',
@@ -12,7 +13,8 @@ export class MonEquipeComponent implements OnInit {
   userId: string | undefined;
   private router: any;
 
-  constructor(private apiService: ApiService) { }
+  // @ts-ignore
+  constructor(private apiService: ApiService, private router: Router) { }
 
   ngOnInit(): void {
     this.userId = this.apiService.getUserId(); // Assurez-vous que getUserId() renvoie une chaîne

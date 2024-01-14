@@ -1,1 +1,14 @@
-<p>create-team works!</p>
+<form (ngSubmit)="onSubmit()">
+  <div>
+    <label for="name">Nom de l'équipe</label>
+    <input type="text" id="name" [(ngModel)]="team.name" name="name" required>
+  </div>
+  <div>
+    <label for="description">Description</label>
+    <textarea id="description" [(ngModel)]="team.description" name="description"></textarea>
+  </div>
+
+  <app-image-uploader (fileChanged)="onFileChange($event)"></app-image-uploader>
+
+  <button type="submit">Créer l'équipe</button>
+</form>
