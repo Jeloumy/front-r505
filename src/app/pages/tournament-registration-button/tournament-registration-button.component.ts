@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { ApiService } from 'chemin-vers-ton-service/api.service';
+import { ApiService } from '../../shared/services/api.service';
 
 @Component({
   selector: 'app-tournament-registration-button',
@@ -7,45 +7,37 @@ import { ApiService } from 'chemin-vers-ton-service/api.service';
   styleUrls: ['./tournament-registration-button.component.scss']
 })
 export class TournamentRegistrationButtonComponent {
-  @Input() tournamentId: number;
-  @Input() isRegistered: boolean;
+  @Input() tournoiId!: string;
+  @Input() teamId!: string | null;
+  isRegistered: boolean = false;
 
   constructor(private apiService: ApiService) {}
 
-  toggleRegistration() {
-    if (this.isRegistered) {
-      this.leaveTournament();
+  registerTeam() {
+    if (this.teamId) {
+      this.apiService.addTeamToTournament(this.tournoiId, this.teamId)
+        .then(() => {
+          this.isRegistered = true;
+          // Gérer la réponse, afficher un message, etc.
+        })
+        .catch(error => {
+          // Gérer l'erreur
+        });
     } else {
-      this.registerToTournament();
+      console.error('Team ID is null');
+      // Gérer le cas où teamId est null
     }
   }
 
-  registerToTournament() {
-    // Appelle la méthode du service pour s'inscrire au tournoi
-    this.apiService.addTeamToTournament(this.tournamentId).subscribe(
-      () => {
-        // Mise à jour de l'état d'inscription
-        this.isRegistered = true;
-      },
-      (error) => {
-        // Gestion des erreurs
-        console.error(error);
-      }
-    );
-  }
 
   leaveTournament() {
-    // Appelle la méthode du service pour se désinscrire du tournoi
-    this.apiService.leaveTournament(this.tournamentId).subscribe(
-      () => {
-        // Mise à jour de l'état d'inscription
+    this.apiService.leaveTournament(this.tournoiId)
+      .then(() => {
         this.isRegistered = false;
-      },
-      (error) => {
-        // Gestion des erreurs
-        console.error(error);
-      }
-    );
+        // Gérer la réponse, afficher un message, etc.
+      })
+      .catch(error => {
+        // Gérer l'erreur
+      });
   }
 }
-

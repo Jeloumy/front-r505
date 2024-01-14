@@ -1,4 +1,3 @@
-<button (click)="toggleRegistration()" class="registration-button">
-  {{ isRegistered ? 'Se désinscrire' : 'Sinscrire' }}
-</button>
+<button *ngIf="!isRegistered" (click)="registerTeam()">S'inscrire</button>
+<button *ngIf="isRegistered" (click)="leaveTournament()">Se désinscrire</button>
 
