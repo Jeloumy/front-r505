@@ -1,3 +1,14 @@
+
+// styles.scss
+
+$primary-color: #F21D56;
+$secondary-color: #145873;
+$accent-color: #35BDF2;
+$background-color: #0F1921;
+$text-color: #F2D6BD;
+$highlight-color: #F2955E;
+
+
 // Styles de base pour la barre de navigation, inspirés par Twitch avec des ajustements personnalisés
 .navbar {
   padding: 0.25rem 1rem; // Réduisez le padding vertical pour diminuer la hauteur
@@ -23,14 +34,14 @@
 
 
 .navbar {
-  background-color: #1f2937; // Fond foncé (gris foncé/bleu marine)
+  background-color: #0F1921; // Fond foncé (gris foncé/bleu marine)
   color: #f9fafb; // Texte clair
   padding: 0.5rem 1rem;
   border-radius: 0; // Suppression des arrondis
 
   .navbar-start {
     .logo {
-      width: 100px; /* ou la taille que vous désirez */
+      width: 60px; /* ou la taille que vous désirez */
       height: auto; /* pour maintenir le ratio aspect */
     }
   }

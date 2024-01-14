@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { ApiService } from '../../shared/services/api.service';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import {BACK_URL} from "../../../environments/environment.development";
+import { BACK_URL } from "../../../environments/environment.development";
 
 @Component({
   selector: 'app-inscription',
@@ -12,7 +12,26 @@ import {BACK_URL} from "../../../environments/environment.development";
 
 export class InscriptionComponent {
   inscriptionForm: FormGroup;
-  BACK_URL=BACK_URL
+  BACK_URL = BACK_URL;
+
+  errorMessages = {
+    name: [
+      { type: 'required', message: 'Le prénom est obligatoire' },
+    ],
+    last_name: [
+      { type: 'required', message: 'Le nom est obligatoire' },
+    ],
+    email: [
+      { type: 'required', message: 'L\'email est obligatoire' },
+      { type: 'email', message: 'L\'email doit être une adresse email valide' },
+    ],
+    pseudo: [
+      { type: 'required', message: 'Le pseudo est obligatoire' },
+    ],
+    password: [
+      { type: 'required', message: 'Le mot de passe est obligatoire' },
+    ],
+  };
 
   constructor(private apiService: ApiService, private router: Router, private fb: FormBuilder) {
     this.inscriptionForm = this.fb.group({
