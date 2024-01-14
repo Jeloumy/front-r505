@@ -1,5 +1,68 @@
+$primary-color: #F21D56;
+$secondary-color: #145873;
+$accent-color: #35BDF2;
+$background-color: #0F1921;
+$text-color: #F2D6BD;
+$highlight-color: #F2955E;
 
-.app-menu {
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+body, html {
+  height: 100%;
+  margin: 0;
+  background-color: $background-color; // Fond foncé pour toute la page
+  color: $text-color;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.login-card {
+  background-color: white; // Carte blanche
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 400px;
+
+  .FormLa {
+    margin-bottom: 1rem;
+
+    label {
+      display: block;
+      margin-bottom: 0.5rem;
+    }
+
+    .form-control {
+      width: 100%;
+      padding: 0.5rem;
+      border: 1px solid $secondary-color;
+      border-radius: 4px;
+    }
+  }
+
+  .btn-primary {
+    background-color: $primary-color;
+    border-color: $primary-color;
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    width: 100%;
+    margin-top: 1rem;
+
+    &:hover {
+      background-color: darken($primary-color, 10%);
+      border-color: darken($primary-color, 10%);
+    }
+  }
+
+  .inscription-link {
+    display: block;
+    text-align: center;
+    margin-top: 1rem;
+    color: $accent-color;
+
+    &:hover {
+      color: darken($accent-color, 10%);
+    }
+  }
 }
 
