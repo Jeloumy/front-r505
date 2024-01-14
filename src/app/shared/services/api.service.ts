@@ -63,6 +63,10 @@ export class ApiService {
     });
   }
 
+  getTeamMembers(teamId: string): Promise<any> {
+    return this.requestApi(`/team/${teamId}/members`);
+  }
+
   getUserId(): string {
     const userId = localStorage.getItem('userId');
     if (!userId) {

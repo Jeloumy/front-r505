@@ -16,6 +16,7 @@
       newMemberPseudo: string = '';
       newCaptainPseudo: string = '';
       isCaptain: boolean = false;
+      teamMembers: any[] = [];
 
       constructor(private apiService: ApiService, private route: ActivatedRoute, private router: Router) {
         this.team = { name: '', description: '', logo:'' };
@@ -34,9 +35,17 @@
         const teamId = this.route.snapshot.params['teamId'];
         if (teamId) {
           this.loadTeam(teamId);
+          this.loadTeamMembers(teamId);
         } else {
-          console.error('Team ID is undefined');
+          // ...
         }
+      }
+
+      loadTeamMembers(teamId: string) {
+        // Remplacer 'getTeamMembers' par la méthode appropriée de votre API
+        this.apiService.getTeamMembers(teamId).then(members => {
+          this.teamMembers = members;
+        }).catch(error => console.error('Erreur lors du chargement des membres de l\'équipe:', error));
       }
 
       loadTeam(teamId: string) {

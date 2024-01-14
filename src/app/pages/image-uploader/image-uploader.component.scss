@@ -3,6 +3,11 @@
   padding: 20px;
   text-align: center;
   cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-height: 300px; /* Définissez la hauteur maximale souhaitée pour la div */
+  overflow: hidden; /* Masquez le contenu qui dépasse la hauteur maximale */
 }
 
 .drop-zone-label {
@@ -17,10 +22,18 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  max-height: 300px; /* Définissez la hauteur maximale souhaitée pour la div */
+  overflow: hidden; /* Masquez le contenu qui dépasse la hauteur maximale */
 }
 
 .selected-file button {
   margin-left: 10px;
+}
+
+.image-preview-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .image-preview {
@@ -31,3 +44,7 @@
   object-fit: contain; /* Garantit que l'image est entièrement visible */
 }
 
+.error-message {
+  color: red;
+  margin-top: 10px;
+}

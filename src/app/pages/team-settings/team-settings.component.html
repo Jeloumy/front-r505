@@ -1,46 +1,88 @@
 <app-menu></app-menu>
-<div class="team-settings" >
-  <h2>Paramètres de l'équipe : {{ team.name }}</h2>
+<div class="flex justify-center items-center min-h-screen bg-custom-bg-color">
 
-  <!-- Formulaire de mise à jour du nom -->
-  <form [formGroup]="teamNameForm" (ngSubmit)="updateTeamName()">
-    <div class="form-group">
-      <label for="teamName">Nom de l'équipe</label>
-      <input type="text" id="teamName" formControlName="teamName" placeholder="Nouveau nom de l'équipe">
-      <button type="submit">Mettre à jour le nom</button>
+  <div class="container my-4">
+    <br> <br>
+    <h2 class="text-2xl font-semibold text-center">Paramètres de l'équipe : {{ team.name }}</h2>
+      <!-- Formulaire de mise à jour du nom -->
+
+    <div class="card">
+      <div class="card-header">
+        <h3>Mise à jour du nom</h3>
+      </div>
+      <div class="card-body">
+        <form [formGroup]="teamNameForm" (ngSubmit)="updateTeamName()">
+          <div class="form-group">
+            <input type="text" id="teamName" formControlName="teamName" placeholder="Nouveau nom de l'équipe">
+            <button type="submit" class="btn btn-primary">Mettre à jour le nom</button>
+          </div>
+        </form>
+      </div>
     </div>
 
-  </form>
-  <!-- Formulaire de mise à jour de la description -->
-  <form [formGroup]="teamDescriptionForm" (ngSubmit)="updateTeamDescription()">
-    <div class="form-group">
-      <label for="teamDescription">Description</label>
-      <textarea id="teamDescription" formControlName="teamDescription" placeholder="Nouvelle description"></textarea>
-      <button type="submit">Mettre à jour la description</button>
+      <!-- Formulaire de mise à jour de la description -->
+
+    <div class="card my-4">
+      <div class="card-header">
+        <h3>Mise à jour de la description</h3>
+      </div>
+      <div class="card-body">
+        <form [formGroup]="teamDescriptionForm" (ngSubmit)="updateTeamDescription()">
+          <div class="form-group">
+            <textarea id="teamDescription" formControlName="teamDescription" placeholder="Nouvelle description"></textarea>
+            <button type="submit" class="btn btn-primary">Mettre à jour la description</button>
+          </div>
+        </form>
+      </div>
     </div>
-  </form>
-  <!-- Formulaire de mise à jour du logo -->
-  <form [formGroup]="teamLogoForm" (ngSubmit)="updateTeamLogo()">
-    <div class="form-group">
-      <label for="teamLogo">Logo</label>
-      <input type="file" id="teamLogo" formControlName="teamLogo" (change)="onFileChange($event)">
-      <button type="submit">Mettre à jour le logo</button>
+
+      <!-- Formulaire de mise à jour du logo -->
+
+    <div class="card my-4">
+      <div class="card-header">
+        <h3>Mise à jour du logo</h3>
+      </div>
+      <div class="card-body">
+        <form [formGroup]="teamLogoForm" (ngSubmit)="updateTeamLogo()">
+          <div class="form-group">
+            <app-image-uploader (fileChanged)="onFileChange($event)"></app-image-uploader>
+            <button type="submit" class="btn btn-primary">Mettre à jour le logo</button>
+          </div>
+        </form>
+      </div>
     </div>
-  </form>
-  <!-- Ajouter un utilisateur -->
-  <div>
-    <h3>Ajouter un membre</h3>
-    <input type="text" [(ngModel)]="newMemberPseudo" placeholder="Pseudo de l'utilisateur">
-    <button (click)="addUserToTeam()">Ajouter</button>
-  </div>
-  <!-- Changer de capitaine -->
-  <div>
-    <h3>Changer le capitaine</h3>
-    <input type="text" [(ngModel)]="newCaptainPseudo" placeholder="Pseudo du nouveau capitaine">
-    <button (click)="setTeamCaptain()">Changer le capitaine</button>
-  </div>
-  <!-- Supprimer l'équipe -->
-  <div>
-    <button (click)="deleteTeam()">Supprimer l'équipe</button>
+
+      <!-- Ajouter un utilisateur -->
+    <div class="card my-4">
+    <div class="card-header">
+      <h3>Ajouter un membre</h3>
+    </div>
+    <div class="card-body">
+        <input type="text" [(ngModel)]="newMemberPseudo" placeholder="Pseudo de l'utilisateur">
+        <button (click)="addUserToTeam()" class="btn btn-primary">Ajouter</button>
+      </div>
+    </div>
+      <!-- Changer de capitaine -->
+    <div class="card my-4">
+      <div class="card-header">
+        <h3>Changer le capitaine</h3>
+      </div>
+      <div class="card-body">
+        <select [(ngModel)]="newCaptainPseudo" class="form-control">
+          <option *ngFor="let member of teamMembers" [value]="member.pseudo">{{ member.pseudo }}</option>
+        </select>
+        <button (click)="setTeamCaptain()" class="btn btn-primary">Changer le capitaine</button>
+      </div>
+    </div>
+
+      <!-- Supprimer l'équipe -->
+    <div class="card">
+      <div class="card-body">
+        <button (click)="deleteTeam()" class="btn btn-danger">Supprimer l'équipe</button>
+      </div>
+    </div>
   </div>
 </div>
+
+
+
